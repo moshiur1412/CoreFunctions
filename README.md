@@ -82,7 +82,10 @@ Just develop for necessary.
 
 ## Technologies and libraries
 
-- Laravel.
+- Ubuntu 18.04.1 
+- Laravel Framework 6.4.0
+- PHP 7.3.9-1
+- MySQL 5.7.27
 
 ## Further Development
 
@@ -107,3 +110,4 @@ Try and learing for the best practices.
 ## References
 
 - https://laravel.com/
+- http://caseyscarborough.com/blog/2013/08/25/pushing-to-multiple-remotes-using-git/
