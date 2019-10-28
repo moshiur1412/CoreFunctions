@@ -82,8 +82,8 @@ Just develop for necessary.
 
 ## Technologies and libraries
 
-- Ubuntu 18.04.1 
-- Laravel Framework 6.4.0
+- Ubuntu 18.04.1 (Homestead)
+- Laravel Framework 6.4.0 (artisan --version)
 - PHP 7.3.9-1
 - MySQL 5.7.27
 
@@ -110,4 +110,5 @@ Try and learing for the best practices.
 ## References
 
 - https://laravel.com/
+- https://app.vagrantup.com/laravel/boxes/homestead
 - http://caseyscarborough.com/blog/2013/08/25/pushing-to-multiple-remotes-using-git/
