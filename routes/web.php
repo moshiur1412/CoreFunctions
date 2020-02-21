@@ -32,3 +32,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('cruds', 'CrudController@index');
 Route::get('cruds/create', 'CrudController@create')->name('cruds.index');
 Route::post('cruds/store', 'CrudController@store')->name('cruds.store');
+
+
+Route::resource('questions', 'QuestionController');
