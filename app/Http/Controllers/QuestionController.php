@@ -32,7 +32,9 @@ class QuestionController extends Controller
     {
         \Log::info('Req=QuestionController@crate Called');
 
-        return view('questions.create');
+        $question = new Question();
+        
+        return view('questions.create', compact('question'));
     }
 
     /**
@@ -45,12 +47,6 @@ class QuestionController extends Controller
     {
         \Log::info('Req=QuestionController@store called');
         
-        // $question = new Question;
-        // $question->title = $request->title;
-        // $question->body = $request->body;
-        // $question->user_id = '1';
-        // $question->save();
-
         $request->user()->questions()->create($request->only('title', 'body'));
         
         return redirect()->route('questions.index')->with('success','Your question has been published.');
@@ -75,7 +71,9 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        \Log::info('Req=QuestionControler@edit Called');
+
+        return view('questions.create', compact('question'));
     }
 
     /**
@@ -85,9 +83,13 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(StoreQuestionPost $request, Question $question)
     {
-        //
+       \Log::info('Req=QuestionControler@update Called');
+        
+       $question->update($request->only('title', 'body'));
+
+        return redirect()->route('questions.index')->with('success', 'Your question has been update successfully.');
     }
 
     /**
@@ -98,6 +100,11 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        
+        \Log::info('Req=QuestionController@destroy Called');
+
+        $question->delete();
+
+        return redirect()->route('questions.index')->with('success', 'Your quesiton has been deleted successfully.');
     }
 }

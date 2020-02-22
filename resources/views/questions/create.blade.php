@@ -13,11 +13,14 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('questions.store') }}" method="POST">
+                        <form action="{{ $question->exists ? route('questions.update', $question->id) : route('questions.store') }}" method="POST">
                             @csrf
+                            @if($question->exists)
+                            @method('PUT')
+                            @endif
                         <div class="form-group">
                             <label for="question_title">Question Title</label>
-                            <input type="text" name="title" value="{{old('title')}}" id="question_title" class="form-control @error('title') is-invalid @enderror">
+                            <input type="text" name="title" value="{{ $question->exists ? $question->title : old('title') }}" id="question_title" class="form-control @error('title') is-invalid @enderror">
 
                             @error('title')
                                 <div class="invalid-feedback">
@@ -28,7 +31,7 @@
 
                         <div class="form-group">
                             <label for="questions_body">Qustion Body</label>
-                            <textarea name="body" id="questions_body" class="form-control @error('body') is-invalid @enderror" rows="10"> {{old('body') }}</textarea>
+                            <textarea name="body" id="questions_body" class="form-control @error('body') is-invalid @enderror" rows="10"> {{ $question->exists ? $question->body : old('body') }}</textarea>
 
                             @error('body')
                             <div class="invalid-feedback">
