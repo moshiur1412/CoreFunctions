@@ -76,8 +76,11 @@ class QuestionController extends Controller
     public function edit(Question $question)
     {
         \Log::info('Req=QuestionControler@edit Called');
+        if(\Gate::allows('update-question', $question)){
+            return view('questions.create', compact('question'));
+        }
+        return abort(404);
 
-        return view('questions.create', compact('question'));
     }
 
     /**
@@ -91,6 +94,7 @@ class QuestionController extends Controller
     {
        \Log::info('Req=QuestionControler@update Called');
         
+       
        $question->update($request->only('title', 'body'));
 
         return redirect()->route('questions.index')->with('success', 'Your question has been update successfully.');
