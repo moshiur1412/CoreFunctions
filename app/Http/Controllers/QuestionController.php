@@ -8,6 +8,11 @@ use App\Http\Requests\StoreQuestionPost;
 
 class QuestionController extends Controller
 {
+    
+    public function __construct(){
+        $this->middleware('auth')->except('index', 'show');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -76,10 +81,14 @@ class QuestionController extends Controller
     public function edit(Question $question)
     {
         \Log::info('Req=QuestionControler@edit Called');
-        if(\Gate::allows('update-question', $question)){
+        
+        // if(\Gate::disallow('update-question', $question)){
+        //     return abort(404);
+        // }
+
+            $this->authorize('update', $question);
+
             return view('questions.create', compact('question'));
-        }
-        return abort(404);
 
     }
 
@@ -94,7 +103,8 @@ class QuestionController extends Controller
     {
        \Log::info('Req=QuestionControler@update Called');
         
-       
+       $this->authorize('update', $question);
+
        $question->update($request->only('title', 'body'));
 
         return redirect()->route('questions.index')->with('success', 'Your question has been update successfully.');
@@ -110,6 +120,8 @@ class QuestionController extends Controller
     {
         
         \Log::info('Req=QuestionController@destroy Called');
+
+        $this->authorize('delete', $question);
 
         $question->delete();
 
