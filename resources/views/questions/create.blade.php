@@ -9,7 +9,7 @@
                     <div class="d-flex align-items-center">
                         <h2>Ask Question</h2>
                         <div class="ml-auto">
-                            <a href="{{route('questions.index') }}"> All Question</a>
+                            <a href="{{route('questions.index') }}" class="btn btn-outline-secondary"> Back All Question</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -17,19 +17,23 @@
                             @csrf
                         <div class="form-group">
                             <label for="question_title">Question Title</label>
-                            <input type="text" name="title" id="question_title" class="form-control @error('title') is-invalid @enderror">
+                            <input type="text" name="title" value="{{old('title')}}" id="question_title" class="form-control @error('title') is-invalid @enderror">
 
                             @error('title')
-                                <div class="invalid-feedback">{{$message }} </div>
+                                <div class="invalid-feedback">
+                                <strong>{{$message }}</strong>  
+                                 </div>
                             @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="questions_body">Qustion Body</label>
-                            <textarea name="body" id="questions_body" class="form-control @error('body') is-invalid @enderror" rows="10"></textarea>
+                            <textarea name="body" id="questions_body" class="form-control @error('body') is-invalid @enderror" rows="10"> {{old('body') }}</textarea>
 
                             @error('body')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="invalid-feedback">
+                            <strong>{{$message }} </strong> 
+                            </div>
                             @enderror
                         </div>
 

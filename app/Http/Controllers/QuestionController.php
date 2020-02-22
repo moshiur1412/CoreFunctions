@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreQuestionPost;
 
 class QuestionController extends Controller
 {
@@ -40,23 +41,19 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreQuestionPost $request)
     {
         \Log::info('Req=QuestionController@store called');
         
-        $this->validate($request, [
-            'title' => 'required|min:10|max:250',
-            'body' => 'required|min:10|max:5000',
+        // $question = new Question;
+        // $question->title = $request->title;
+        // $question->body = $request->body;
+        // $question->user_id = '1';
+        // $question->save();
 
-        ]);
-
-        $question = new Question;
-        $question->title = $request->title;
-        $question->body = $request->body;
-        $question->user_id = '1';
-        $question->save();
+        $request->user()->questions()->create($request->only('title', 'body'));
         
-        return redirect(route('questions.index'))->with('Success! The Question has been save.');
+        return redirect()->route('questions.index')->with('success','Your question has been published.');
     }
 
     /**
