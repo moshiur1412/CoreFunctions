@@ -29,7 +29,9 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        \Log::info('Req=QuestionController@crate Called');
+
+        return view('questions.create');
     }
 
     /**
@@ -40,7 +42,21 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \Log::info('Req=QuestionController@store called');
+        
+        $this->validate($request, [
+            'title' => 'required|min:10|max:250',
+            'body' => 'required|min:10|max:5000',
+
+        ]);
+
+        $question = new Question;
+        $question->title = $request->title;
+        $question->body = $request->body;
+        $question->user_id = '1';
+        $question->save();
+        
+        return redirect(route('questions.index'))->with('Success! The Question has been save.');
     }
 
     /**
