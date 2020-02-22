@@ -60,7 +60,11 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        \Log::info('Req=QuestionController@show Called');
+
+        $question->increment('views');
+
+        return view('questions.show', compact('question'));
     }
 
     /**

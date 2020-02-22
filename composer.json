@@ -10,13 +10,14 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "illuminate/routing": "^5.5|^6",
+        "illuminate/session": "^5.5|^6",
+        "illuminate/support": "^5.5|^6",
         "laravel/framework": "^6.2",
         "laravel/helpers": "^1.1",
         "laravel/tinker": "^1.0",
         "maximebf/debugbar": "~1.15.0",
-        "illuminate/routing": "^5.5|^6",
-        "illuminate/session": "^5.5|^6",
-        "illuminate/support": "^5.5|^6",
+        "parsedown/laravel": "^1.2",
         "symfony/debug": "^3|^4",
         "symfony/finder": "^3|^4"
     },

@@ -36,13 +36,13 @@
                                 </div>
                                 <div class="media-body">
                                     <div class="d-flex align-items-center">
-                                        <h3 class="mt-0"><a href="{{$question->url }}"> {{ $question->title }} </a></h3>
+                                        <h3 class="mt-0"><a href="{{ $question->url }}"> {{ $question->title }} </a></h3>
                                         <div class="ml-auto">
                                             <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-outline-info"> Edit</a>
                                             <form class="form-delete" action="{{route('questions.destroy', $question->id)}}" method="POST">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-outline-danger" onclick="Confirm('Are you Sure?');">Delete</button>
+                                                <button type="submit" class="btn btn-outline-danger" onclick="confirm('Are you Sure?');">Delete</button>
                                             </form>
                                         </div>
                                     </div>
