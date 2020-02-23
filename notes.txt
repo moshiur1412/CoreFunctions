@@ -1,0 +1,28 @@
+Three Repo Config
+====================
+git push orign master
+
+
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = false
+[branch "master"]
+	remote = github
+	merge = refs/heads/master
+[remote "github"]
+	url = git@github.com:vorsurm/CoreFunctions.git
+	fetch = +refs/heads/*:refs/remotes/github/*
+[remote "bitbucket"]
+	url = git@bitbucket.org:vorsurm/corefunctions.git
+	fetch = +refs/heads/*:refs/remotes/bitbucket/*
+[remote "gitlab"]
+	url = git@gitlab.com:vorsurm/corefunctions.git
+	fetch = +refs/heads/*:refs/remotes/gitlab/*
+[remote "origin"]
+	url = git@github.com:vorsurm/CoreFunctions.git
+	url = git@bitbucket.org:vorsurm/corefunctions.git
+	url = git@gi
