@@ -36,3 +36,5 @@ Route::post('cruds/store', 'CrudController@store')->name('cruds.store');
 
 Route::resource('questions', 'QuestionController')->except(['show']);
 Route::get('questions/{slug}','QuestionController@show')->name('questions.show');
+
+Route::resource('answers', 'AnswereController');
