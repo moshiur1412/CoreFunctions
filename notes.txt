@@ -25,4 +25,4 @@ git push orign master
 [remote "origin"]
 	url = git@github.com:vorsurm/CoreFunctions.git
 	url = git@bitbucket.org:vorsurm/corefunctions.git
-	url = git@gi
+	url = git@gitlab.com:vorsurm/corefunctions.git
