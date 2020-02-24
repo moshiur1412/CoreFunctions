@@ -15,20 +15,17 @@ class Answer extends Model
     }
 
     public static function boot(){
-    
+
         parent::boot();
 
         static::created(function($answer){
-            
-            echo "Created done\n";
             $answer->question->increment('answers_count');
             $answer->save();
-           
+
+            \Log::info('Req=App\Models\Answer::boot static::created called');
+
        });
 
-        static::saved(function(){
-            echo "Saved done\n";
-       });
 
 
     }
