@@ -10958,3 +10958,7 @@ a.text-dark:focus {
   color: #ffed4a;
 }
 
+.vote-controls a.answer-accepted {
+  color: #38c172;
+}
+

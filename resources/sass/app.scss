@@ -78,5 +78,8 @@
                 color: $warning;
             }
          }
+         &.answer-accepted{
+             color: $green;
+         }
     }
 }
