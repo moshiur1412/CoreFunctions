@@ -29,7 +29,7 @@
                                 @csrf
                                 </form>
                                 @else
-                                @if($answer->isBest())
+                                @if($answer->is_best)
                                 <a title="This is the best answer" class="{{ $answer->status }} mt-4"> <i class="fas fa-check fa-2x"></i> </a>
                                 @endif
                             @endcan
