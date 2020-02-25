@@ -7,12 +7,14 @@
             </div>
         </div>
 
+        @include('layouts._message')
+
             @foreach($answers as $answer)
                 <div class="card-body">
                     <div class="media">
                         <div class="d-flex flex-column vote-controls">
                             <a href="" title="This answer is useful" class="vote-up">
-                                <i class="fas fa-caret-up fa-3x"></i> 
+                                <i class="fas fa-caret-up fa-3x"></i>
                             </a>
                             <span class="votes_count"> 123 </span>
                             <a href="" title="This answer is not useful" class="vote-down off">
@@ -24,9 +26,28 @@
                         </div>
                         <div class="media-body">
                         {!! $answer->body_html !!}
-                        
 
-                        <div class="float-right">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="d-flex">
+                                @can('update', $answer)
+                                <a class="btn btn-outline-secondary mr-2" href="{{ route('questions.answers.edit', [$question->id, $answer->id]) }}">Edit</a>
+                                @endcan
+                                @can('delete', $answer)
+                                <form action="{{route('questions.answers.destroy', [$question->id, $answer->id])}}" method="POST" class="form-delete">
+                                    @csrf
+                                    @method('Delete')
+                                   <button class="btn btn-outline-danger" type="submit" onclick="confirm('Are you sure?')"> Delete </button>
+                                </form>
+                                @endcan
+                            </div>
+
+
+                            </div>
+                            <div class="col-4">
+
+                            </div>
+                            <div class="col-4">
                                 <span class="text-muted"> Answered {{ $answer->created_date }} </span>
                                 <div class="media mt-1">
                                         <a href="{{ $answer->user->url }}">
@@ -36,9 +57,11 @@
                                         <a href="{{ $answer->user->url }}"> {{ $answer->user->name }} </a>
                                     </div>
                                 </div>
+                            </div>
                         </div>
+
                         </div>
-                    </div>  
+                    </div>
                 </div>
             <hr>
             @endforeach

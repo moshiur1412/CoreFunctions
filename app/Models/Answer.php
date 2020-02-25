@@ -22,11 +22,13 @@ class Answer extends Model
 
         static::created(function($answer){
             $answer->question->increment('answers_count');
-            $answer->save();
-
             \Log::info('Req=App\Models\Answer::boot static::created called');
-
        });
+
+       static::deleted(function ($answer){
+        $answer->question->decrement('answers_count');
+        \Log::info('Req=App\Models\Answer::boot satic::deleted called');
+        });
 
     }
 

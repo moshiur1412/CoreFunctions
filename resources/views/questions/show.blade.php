@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-               
+
                 <div class="card-body">
                     <div class="card-title">
                         <div class="d-flex align-items-center">
@@ -17,8 +17,8 @@
                         </div>
                     </div>
                     <hr>
-                    
-                    
+
+
 
                     <div class="media">
 
@@ -61,7 +61,7 @@
         </div><!--\* end col-md -->
     </div><!--\* end row class -->
 
-    @include('layouts._message')
+
 
     @include('answers._index', [
        'answersCount' =>  $question->answers_count,
@@ -69,7 +69,7 @@
     ])
 
     @include('answers._create')
-    
+
 </div>
 </div>
 

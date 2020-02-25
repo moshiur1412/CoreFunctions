@@ -21,20 +21,10 @@ class AnswerController extends Controller
         ]);
 
         $question->answers()->create(['body' => $request->body, 'user_id' => auth()->id() ]);
-        
+
         return back()->with('success', 'Your answer has been submitted successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Answer  $answer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Answer $answer)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -42,9 +32,13 @@ class AnswerController extends Controller
      * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Answer $answer)
+    public function edit(Question $question, Answer $answer)
     {
-        //
+        \Log::info('Req=AnswerController@edit called');
+
+        $this->authorize('update', $answer);
+
+        return view('answers.edit', compact('question', 'answer'));
     }
 
     /**
@@ -54,9 +48,18 @@ class AnswerController extends Controller
      * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Answer $answer)
+    public function update(Request $request, Question $question, Answer $answer)
     {
-        //
+
+        \Log::info('Req=AnswerController@update called');
+
+        $this->authorize('update', $answer);
+
+        $answer->update($request->validate([
+            'body' => 'required|max:1000'
+        ]));
+
+        return redirect()->route('questions.show', $question->slug)->with('success', 'Your answer has been updated successfully');
     }
 
     /**
@@ -65,8 +68,16 @@ class AnswerController extends Controller
      * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Answer $answer)
+    public function destroy(Question $question, Answer $answer)
     {
-        //
+
+        \Log::info('Req=AnswerController@destroy called');
+
+        $this->authorize('delete', $answer);
+
+        $answer->delete();
+
+        return back()->with('success', 'Your answer has been deleted successfully.');
+
     }
 }
