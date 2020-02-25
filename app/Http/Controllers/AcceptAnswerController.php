@@ -11,6 +11,8 @@ class AcceptAnswerController extends Controller
 
     \Log::info('Req=AcceptAnswerController@__invoke called');
 
+    $this->authorize('accept', $answer);
+
     $answer->question->acceptBestAnswer($answer);
 
     return back();
