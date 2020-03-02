@@ -49,4 +49,11 @@ class Question extends Model
         $this->best_answer_id = $answer->id;
         $this->save();
    }
+
+   public function favorites(){
+
+      return  $this->belongsToMany(User::class, 'favorites');
+   }
+
+
 }
