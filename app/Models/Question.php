@@ -55,5 +55,11 @@ class Question extends Model
       return  $this->belongsToMany(User::class, 'favorites');
    }
 
+   public function getFavoriteCountAttribute(){
+       return $this->favorites()->count();
+   }
 
+   public function isFavorite(){
+    return $this->favorites()->where('user_id', auth()->id())->count() > 0;
+   }
 }
