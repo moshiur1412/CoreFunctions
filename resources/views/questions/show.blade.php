@@ -24,15 +24,27 @@
 
                         <div class="d-fex flex-column vote-controls">
 
-                            <a href="" title="This question is useful" class="vote-up">
+                            <a href="" title="This question is useful" class="vote-up {{ Auth::guest() ? 'off' : ''}}"
+                            onclick="event.preventDefault(); document.getElementById('vote-up-{{$question->id}}').submit();">
                                 <i class="fas fa-caret-up fa-3x"> </i>
                             </a>
 
-                            <span class="votes-count"> 1024 </span>
+                            <form action="{{route('questions.vote', $question->id)}}" id="vote-up-{{$question->id}}" method="POST" style="display:none;">
+                            @csrf
+                            <input type="hidden" name="vote" value="1">
+                            </form>
+                            <span class="votes-count "> {{ $question->votes_count }} </span>
 
-                            <a href="" title="This question is not useful" class="vote-down off">
+                            <a href="" title="This question is not useful" class="vote-down {{Auth::guest() ? 'off' : ''}}"
+                            onclick="event.preventDefault(); document.getElementById('vote-down-{{$question->id}}').submit();"
+                            >
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
+
+                            <form action="{{route('questions.vote', $question->id)}}" id="vote-down-{{$question->id}}" method="POST" style="display:none;">
+                            @csrf
+                            <input type="hidden" name="vote" value="-1">
+                            </form>
 
                             <a onclick="event.preventDefault(); document.getElementById('favorite-form-{{$question->id}}').submit();" title="Click to mark as favorite question (Click again to undo)" class="favorite mt-2 {{$question->isFavorite() > 0 ? 'favorited' : 'off'  }}">
                                 <i class="fas fa-star fa-2x"></i>

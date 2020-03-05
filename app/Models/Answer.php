@@ -62,6 +62,6 @@ class Answer extends Model
 
     public function votes(){
 
-        return $this->morphedByMany(User::class, 'votable');
+        return $this->morphToMany(User::class, 'votable');
     }
 }
