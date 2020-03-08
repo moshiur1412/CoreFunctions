@@ -13,13 +13,26 @@
                 <div class="card-body">
                     <div class="media">
                         <div class="d-flex flex-column vote-controls">
-                            <a href="" title="This answer is useful" class="vote-up">
+                            <a onclick="event.preventDefault(); document.getElementById('answer-vote-up-{{$answer->id}}').submit();" title="This answer is useful" class="vote-up {{ Auth::guest() ? 'off' : ''}}">
                                 <i class="fas fa-caret-up fa-3x"></i>
                             </a>
-                            <span class="votes_count"> 123 </span>
-                            <a href="" title="This answer is not useful" class="vote-down off">
+
+                            <form action="{{ route('answers.vote', $answer->id ) }}" id="answer-vote-up-{{$answer->id}}" method="POST" style="display:none">
+                            @csrf
+                            <input type="hidden" name="vote" value="1">
+                            </form>
+
+                            <span class="votes_count"> {{ $answer->votes_count}} </span>
+                            
+                            <a onclick="event.preventDefault(); document.getElementById('answer-vote-down-{{$answer->id}}').submit();" title="This answer is not useful" class="vote-down {{ Auth::guest() ? 'off' : ''}}">
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
+
+                            <form action="{{ route('answers.vote', $answer->id) }}" id="answer-vote-down-{{$answer->id}}" method="POST" style="display:none">
+                            @csrf
+                            <input type="hidden" name="vote" value="-1">
+                            </form>
+
                             @can('accept', $answer)
                                 <a onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit()" title="Mark this as a best answer" class="{{ $answer->status }} mt-4">
                                 <i class="fas fa-check fa-2x"></i>
