@@ -67,4 +67,12 @@ class Question extends Model
     public function votes(){
         return $this->morphToMany(User::class, 'votable');
     }
+
+    public function voteUp(){
+        return $this->votes()->wherePivot('vote', 1)->sum('vote');
+    }
+
+    public function voteDown(){
+        return $this->votes()->wherePivot('vote', -1)->sum('vote');
+    }
 }
