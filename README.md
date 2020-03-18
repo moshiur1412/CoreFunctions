@@ -27,7 +27,7 @@ Core Functions are developed to easily get the most common features and function
 
 ## Overview
 
-Just develop for necessary.
+Develop for must have requirements.
 
 ## Problem Domain Area
 
@@ -86,6 +86,9 @@ Just develop for necessary.
 - Laravel Framework 6.4.0 (artisan --version)
 - PHP 7.3.9-1
 - MySQL 5.7.27
+- Docker
+- Redis
+- Queuee 
 
 ## Further Development
 
@@ -94,8 +97,10 @@ Just develop for necessary.
 ## How to run the System
 
 ```sh
-$ git clone https://vorsurm@bitbucket.org/vorsurm/corefunctions.git
-
+git@github.com:vorsurm/CoreFunctions.git
+git@bitbucket.org:vorsurm/corefunctions.git
+git@gitlab.com:vorsurm/corefunctions.git
+$ git clone any above url 
 $ cd corefunctions
 $ 
 
