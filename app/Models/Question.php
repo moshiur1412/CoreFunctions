@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+    use VotableTrait;
+    
     protected $guarded = [];
 
     public function user(){
@@ -63,16 +65,5 @@ class Question extends Model
     return $this->favorites()->where('user_id', auth()->id())->count() > 0;
    }
 
-
-    public function votes(){
-        return $this->morphToMany(User::class, 'votable');
-    }
-
-    public function voteUp(){
-        return $this->votes()->wherePivot('vote', 1)->sum('vote');
-    }
-
-    public function voteDown(){
-        return $this->votes()->wherePivot('vote', -1)->sum('vote');
-    }
+    
 }
