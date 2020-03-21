@@ -46,8 +46,8 @@
                             <input type="hidden" name="vote" value="-1">
                             </form>
 
-                            <a onclick="event.preventDefault(); document.getElementById('favorite-form-{{$question->id}}').submit();" title="Click to mark as favorite question (Click again to undo)" class="favorite mt-2 {{$question->isFavorite() > 0 ? 'favorited' : 'off'  }}">
-                                <i class="fas fa-star fa-2x"></i>
+                            <a onclick="event.preventDefault(); document.getElementById('favorite-form-{{$question->id}}').submit();" title="Click to mark as favorite question (Click again to undo)" 
+                                class="favorite mt-2 {{$question->isFavorite() > 0 ? 'favorited' : 'off'  }}">  <i class="fas fa-star fa-2x"></i>
                                 <span class="favorites-count"> {{ $question->favorite_count }} </span>
                              </a>
 
@@ -61,16 +61,14 @@
 
                         <div class="media-body">
                             {!! $question->body_html !!}
-                            <div class="float-right">
-                                <span class="text-muted">Questioned {{ $question->created_date }}</span>
-                                <div class="media mt-2">
-                                    <a href="{{$question->user->url}}">
-                                    <img src="{{$question->user->gravatar }}" alt="{{$question->user->name}}">
-                                    </a>
-                                    <div class="media-body m-1">
-                                        <a href="{{ $question->user->url }}"> {{ $question->user->name }} </a>
-                                    </div>
-                                </div>
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-4"></div>
+
+                                @include('shared._author', [
+                                    'label' => 'Asked',
+                                    'model' => $question
+                                ])
                             </div>
                         </div> <!--/* end media-body class -->
                     </div> <!--\* end media class -->
