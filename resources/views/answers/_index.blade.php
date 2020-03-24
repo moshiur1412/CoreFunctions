@@ -1,85 +1,53 @@
 <div class="row mt-5">
     <div class="col-md-12">
-    <div class="card">
-        <div class="card-header">
-            <div class="card-title mt-2">
-                <h2> {{ $answersCount ." ". str_plural('Answer', $answersCount) }}</h2>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title mt-2">
+                    <h2> {{ $answersCount ." ". str_plural('Answer', $answersCount) }}</h2>
+                </div>
             </div>
-        </div>
-
-        @include('layouts._message')
-
+            
+            @include('layouts._message')
+            
             @foreach($answers as $answer)
-                <div class="card-body">
-                    <div class="media">
-                        <div class="d-flex flex-column vote-controls">
-                            <a onclick="event.preventDefault(); document.getElementById('answer-vote-up-{{$answer->id}}').submit();" title="This answer is useful" class="vote-up {{ Auth::guest() ? 'off' : ''}}">
-                                <i class="fas fa-caret-up fa-3x"></i>
-                            </a>
-
-                            <form action="{{ route('answers.vote', $answer->id ) }}" id="answer-vote-up-{{$answer->id}}" method="POST" style="display:none">
-                            @csrf
-                            <input type="hidden" name="vote" value="1">
-                            </form>
-
-                            <span class="votes_count"> {{ $answer->votes_count}} </span>
-                            
-                            <a onclick="event.preventDefault(); document.getElementById('answer-vote-down-{{$answer->id}}').submit();" title="This answer is not useful" class="vote-down {{ Auth::guest() ? 'off' : ''}}">
-                                <i class="fas fa-caret-down fa-3x"></i>
-                            </a>
-
-                            <form action="{{ route('answers.vote', $answer->id) }}" id="answer-vote-down-{{$answer->id}}" method="POST" style="display:none">
-                            @csrf
-                            <input type="hidden" name="vote" value="-1">
-                            </form>
-
-                            @can('accept', $answer)
-                                <a onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit()" title="Mark this as a best answer" class="{{ $answer->status }} mt-4">
-                                <i class="fas fa-check fa-2x"></i>
-                                </a>
-
-                                <form action="{{route('answers.accept', $answer->id)}}" id="accept-answer-{{$answer->id}}" method="POST" style="display:none;">
-                                @csrf
-                                </form>
-                                @else
-                                @if($answer->is_best)
-                                <a title="This is the best answer" class="{{ $answer->status }} mt-4"> <i class="fas fa-check fa-2x"></i> </a>
-                                @endif
-                            @endcan
-                        </div>
-                        <div class="media-body">
+            <div class="card-body">
+                <div class="media">
+                    <div class="d-flex flex-column vote-controls">
+                        @include('shared._vote', [
+                            'model' => $answer,
+                            'model_name' => 'answer'
+                        ])
+                    </div>
+                    <div class="media-body">
                         {!! $answer->body_html !!}
-
+                        
                         <div class="row">
                             <div class="col-4">
                                 <div class="d-flex">
-                                @can('update', $answer)
-                                <a class="btn btn-outline-secondary mr-2" href="{{ route('questions.answers.edit', [$question->id, $answer->id]) }}">Edit</a>
-                                @endcan
-                                @can('delete', $answer)
-                                <form action="{{route('questions.answers.destroy', [$question->id, $answer->id])}}" method="POST" class="form-delete">
-                                    @csrf
-                                    @method('Delete')
-                                   <button class="btn btn-outline-danger" type="submit" onclick="confirm('Are you sure?')"> Delete </button>
-                                </form>
-                                @endcan
+                                    @can('update', $answer)
+                                    <a class="btn btn-outline-secondary mr-2" href="{{ route('questions.answers.edit', [$question->id, $answer->id]) }}">Edit</a>
+                                    @endcan
+                                    @can('delete', $answer)
+                                    <form action="{{route('questions.answers.destroy', [$question->id, $answer->id])}}" method="POST" class="form-delete">
+                                        @csrf
+                                        @method('Delete')
+                                        <button class="btn btn-outline-danger" type="submit" onclick="confirm('Are you sure?')"> Delete </button>
+                                    </form>
+                                    @endcan
+                                </div>
                             </div>
-
-
-                            </div>
+                            
+                            <div class="col-4"> </div>
                             <div class="col-4">
-
-                            </div>
-                            @include('shared._author',[
+                                @include('shared._author',[
                                 'label' => 'Answered',
                                 'model' => $answer
-                            ])
-                       
-                        </div>
-
+                                ])
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
             <hr>
             @endforeach
         </div>
