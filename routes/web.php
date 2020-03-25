@@ -15,6 +15,8 @@
 // 	return view('layouts.app');
 // });
 
+Route::get('/', 'QuestionController@index');\
+
 Auth::routes();
 
 

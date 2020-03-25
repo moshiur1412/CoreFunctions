@@ -20,7 +20,7 @@
 
                         @include('layouts._message')
 
-                        @foreach($questions as $question)
+                        @forelse($questions as $question)
                             <div class="media">
 
                                 <div class="d-flex flex-column counters">
@@ -63,8 +63,11 @@
                                 </div>
                             </div>
                         <hr>
-
-                    @endforeach
+                    @empty
+                    <div class="alert alert-warning">
+                        <strong>Sorry,</strong> There is no Question here.
+                    </div>
+                    @endforelse
 
                        {{ $questions->links() }}
 
