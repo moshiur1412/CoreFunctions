@@ -39,8 +39,8 @@ class Question extends Model
     }
 
     public function getBodyHtmlAttribute(){
-
-        return \Parsedown::instance()->text($this->body);
+       
+        return clean($this->body());
     }
 
    public function answers(){
@@ -65,5 +65,12 @@ class Question extends Model
     return $this->favorites()->where('user_id', auth()->id())->count() > 0;
    }
 
+   public function bodyHtml(){
+       return str_limit($this->body(), 400);
+   }
+
+   public function body(){
+    return \Parsedown::instance()->text($this->body);
+   }
     
 }
