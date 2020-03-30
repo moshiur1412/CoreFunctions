@@ -23,7 +23,7 @@
                         <div class="d-fex flex-column vote-controls">
                             @include('shared._vote', [
                                 'model' => $question,
-                                'model_name' => 'question'
+                                'model_name' => 'Question'
                             ])
                            
                         </div>

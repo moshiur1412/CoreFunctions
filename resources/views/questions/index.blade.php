@@ -21,7 +21,6 @@
                         @include('layouts._message')
 
                         @forelse($questions as $question)
-        
                             @include('questions._excerpt')    
                         @empty
                             <div class="alert alert-warning">
@@ -31,7 +30,7 @@
 
                        {{ $questions->links() }}
 
-                 </div>
+                </div>
 
             </div>
         </div>

@@ -24,18 +24,18 @@
 
                             @error('title')
                                 <div class="invalid-feedback">
-                                <strong>{{$message }}</strong>  
+                                <strong>{{ $message }}</strong>  
                                  </div>
                             @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="questions_body">Qustion Body</label>
-                            <textarea name="body" id="questions_body" class="form-control @error('body') is-invalid @enderror" rows="10"> {{  old('body') }}</textarea>
+                            <textarea name="body" id="questions_body" class="form-control @error('body') is-invalid @enderror" rows="10">{{ old('body') }}</textarea>
 
                             @error('body')
                             <div class="invalid-feedback">
-                            <strong>{{$message }} </strong> 
+                            <strong>{{ $message }} </strong> 
                             </div>
                             @enderror
                         </div>

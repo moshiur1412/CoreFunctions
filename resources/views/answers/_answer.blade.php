@@ -2,7 +2,7 @@
     <div class="d-flex flex-column vote-controls">
         @include('shared._vote', [
             'model' => $answer,
-            'model_name' => 'answer'
+            'model_name' => 'Answer'
         ])
     </div>
     <div class="media-body">
