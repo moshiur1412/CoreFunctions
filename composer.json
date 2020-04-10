@@ -21,7 +21,7 @@
         "mews/purifier": "^3.2",
         "parsedown/laravel": "^1.2",
         "symfony/debug": "^3|^4",
-        "fzaninotto/faker": "^1.6",
+        "fzaninotto/faker": "^1.4",
         "symfony/finder": "^3|^4"
     },
     "require-dev": {
