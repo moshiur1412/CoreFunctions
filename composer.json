@@ -43,6 +43,10 @@
         }
     },
     "autoload": {
+        "files": [
+            "Models/User.php",
+            "Models/Amin.php"
+        ],
         "psr-4": {
             "App\\": "app/"
         },
@@ -51,6 +55,7 @@
             "database/factories"
         ]
     },
+    
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
