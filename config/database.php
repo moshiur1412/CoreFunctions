@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Str;
 
-// For Heroku --> 
-$DATABASE_URL = parse_url(getenv("DATABASE_URL"));
-
 return [
 
     /*
@@ -74,7 +71,7 @@ return [
             'database' => ltrim($DATABASE_URL["path"], "/"),
             'username' => $DATABASE_URL["user"],
             'password' => $DATABASE_URL["pass"],
-            'charset' => 'utf8',
+            'charset' => 'utf8mb4',
             'prefix' => '',
             'schema' => 'public',
             'sslmode' => 'require',
