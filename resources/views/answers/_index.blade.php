@@ -11,7 +11,7 @@
             @include('layouts._message')
             
             @foreach($answers as $answer)
-            @include('answers._answer')            
+                @include('answers._answer')            
             @endforeach
         </div>
     </div>
