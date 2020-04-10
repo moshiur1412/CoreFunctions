@@ -47,7 +47,7 @@ class User extends Authenticatable
     }
 
     public function getUrlAttribute(){
-        return '#';
+        return "#";
     }
 
     public function getGravatarAttribute(){
