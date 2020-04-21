@@ -3786,8 +3786,24 @@ __webpack_require__.r(__webpack_exports__);
     return {
       editing: false,
       body: this.answer.body,
-      bodyHtml: this.answer.body_html
+      bodyHtml: this.answer.body_html,
+      id: this.answer.id,
+      questionId: this.answer.question_id
     };
+  },
+  methods: {
+    update: function update() {
+      var _this = this;
+
+      axios.patch(route('questions.answers.edit', [$this.id, $this.questionId]), {
+        body: this.body
+      }).then(function (res) {
+        console.log(res);
+        _this.editing = false;
+      })["catch"](function (err) {
+        console.log("Sometings wrong!");
+      });
+    }
   }
 });
 
