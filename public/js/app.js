@@ -3779,7 +3779,6 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['answer'],
   data: function data() {
@@ -3795,13 +3794,15 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       var _this = this;
 
-      axios.patch(route('questions.answers.edit', [$this.id, $this.questionId]), {
+      axios.patch("/questions/".concat(this.questionId, "/answers/").concat(this.id), {
         body: this.body
       }).then(function (res) {
         console.log(res);
         _this.editing = false;
+        _this.body_html = res.data.body_html;
+        alert(res.data.message);
       })["catch"](function (err) {
-        console.log("Sometings wrong!");
+        console.log("Something went wrong!");
       });
     }
   }

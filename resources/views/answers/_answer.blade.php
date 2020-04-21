@@ -8,12 +8,12 @@
     </div>
     <div class="media-body">
         
-        <form v-if="editing" @submit="update">
+        <form v-if="editing" @submit.prevent="update">
             <div class="form-group">
                 <textarea v-model="body" rows="10" class="form-control"></textarea>
             </div>
-            <button @click="editing = false"> Update </button>
-            <button @click="editing = false"> Cancel </button>
+            <button class="btn btn-primary"> Update </button>
+            <button class="btn btn-outline-secondary" @click="editing = false" type="button"> Cancel </button>
         </form>
         <div v-else>
             <div v-html="bodyHtml"></div>
