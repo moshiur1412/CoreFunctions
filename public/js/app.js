@@ -3812,7 +3812,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.body_html = res.data.body_html;
         alert(res.data.message);
       })["catch"](function (err) {
-        console.log("Something went wrong!");
+        alert(err.response.data.message);
       });
     }
   }
