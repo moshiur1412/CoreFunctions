@@ -14,7 +14,16 @@ export default {
     },
 
     methods: {
+        edit (){
+            this.beforeEditCache = this.body;
+            this.editing = true;
+        },
+        cancel(){
+            this.body = $this.beforeEditCache;
+            this.editing= false;
+        },
         update() {
+            // axios.patch(route('questions.answer', [$this.questionId, $this.id]), {
             axios.patch(`/questions/${this.questionId}/answers/${this.id}`, {
                 body: this.body
 
