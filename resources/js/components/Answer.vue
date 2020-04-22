@@ -29,7 +29,7 @@ export default {
 
             })
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 this.editing = false;
                 this.body_html = res.data.body_html;
                 alert(res.data.message);

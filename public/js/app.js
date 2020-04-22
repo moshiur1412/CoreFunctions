@@ -3807,7 +3807,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.patch("/questions/".concat(this.questionId, "/answers/").concat(this.id), {
         body: this.body
       }).then(function (res) {
-        console.log(res);
+        // console.log(res);
         _this.editing = false;
         _this.body_html = res.data.body_html;
         alert(res.data.message);
