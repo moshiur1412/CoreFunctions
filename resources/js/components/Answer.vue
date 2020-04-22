@@ -31,12 +31,18 @@ export default {
             .then(res => {
                 // console.log(res);
                 this.editing = false;
-                this.body_html = res.data.body_html;
+                this.bodyHtml = res.data.body_html;
                 alert(res.data.message);
             })
             .catch(err =>{
                 alert(err.response.data.message);
             });
+        }
+    },
+
+    computed: {
+        isInvalid(){
+            return this.body.length < 10;
         }
     }
 }

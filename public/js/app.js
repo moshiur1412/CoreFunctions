@@ -3809,11 +3809,16 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         // console.log(res);
         _this.editing = false;
-        _this.body_html = res.data.body_html;
+        _this.bodyHtml = res.data.body_html;
         alert(res.data.message);
       })["catch"](function (err) {
         alert(err.response.data.message);
       });
+    }
+  },
+  computed: {
+    isInvalid: function isInvalid() {
+      return this.body.length < 10;
     }
   }
 });

@@ -12,7 +12,7 @@
             <div class="form-group">
                 <textarea v-model="body" rows="10" class="form-control"></textarea>
             </div>
-            <button class="btn btn-primary"> Update </button>
+            <button class="btn btn-primary" :disabled="isInvalid"> Update </button>
             <button class="btn btn-outline-secondary" @click="cancel" type="button"> Cancel </button>
         </form>
         <div v-else>
