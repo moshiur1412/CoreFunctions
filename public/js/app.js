@@ -3787,13 +3787,23 @@ __webpack_require__.r(__webpack_exports__);
       body: this.answer.body,
       bodyHtml: this.answer.body_html,
       id: this.answer.id,
-      questionId: this.answer.question_id
+      questionId: this.answer.question_id,
+      beforeEditCache: null
     };
   },
   methods: {
+    edit: function edit() {
+      this.beforeEditCache = this.body;
+      this.editing = true;
+    },
+    cancel: function cancel() {
+      this.body = this.beforeEditCache;
+      this.editing = false;
+    },
     update: function update() {
       var _this = this;
 
+      // axios.patch(route('questions.answer', [$this.questionId, $this.id]), {
       axios.patch("/questions/".concat(this.questionId, "/answers/").concat(this.id), {
         body: this.body
       }).then(function (res) {
