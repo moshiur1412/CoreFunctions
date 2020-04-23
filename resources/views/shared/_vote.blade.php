@@ -18,10 +18,14 @@
     <input type="hidden" name="vote" value="-1">
 </form>
 
-@if($model == $question)
-@include('shared._favorite')
-@else
-@include('shared._accept')
+@if($model instanceof App\Models\Question)
+    @include('shared._favorite', [
+        'model' => $model
+    ])
+@elseif($model instanceof App\Models\Answer)
+    @include('shared._accept', [
+        'model' => $model
+    ])
 @endif
 
 
