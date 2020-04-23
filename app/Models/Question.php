@@ -10,7 +10,7 @@ class Question extends Model
     
     protected $guarded = [];
     
-    protected $appends = ['created_date'];
+    protected $appends = ['created_date', 'favorite_count'];
     
     public function user(){
         return $this->belongsTo(User::class);
