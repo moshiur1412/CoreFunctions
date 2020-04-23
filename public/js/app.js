@@ -3803,39 +3803,53 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       var _this = this;
 
-      // axios.patch(route('questions.answer', [$this.questionId, $this.id]), {
       axios.patch(this.endpoint, {
         body: this.body
       }).then(function (res) {
-        // console.log(res);
         _this.editing = false;
         _this.bodyHtml = res.data.body_html;
 
         _this.$toast.success(res.data.message, "Success", {
           timeout: 3000
-        }); // alert(res.data.message);
-
+        });
       })["catch"](function (err) {
         _this.$toast.error(err.response.data.message, "Error", {
           timeout: 3000
-        }); // alert(err.response.data.message);
-
+        });
       });
     },
     destroy: function destroy() {
       var _this2 = this;
 
-      if (confirm("Are you sure?")) {
-        axios["delete"](this.endpoint).then(function (res) {
-          $(_this2.$el).fadeOut(500, function () {
-            _this2.$toast.success(res.data.message, "Success", {
-              timeout: 3000
+      this.$toast.question("Are you sure about that?", "Confirm", {
+        timeout: 20000,
+        close: false,
+        overlay: true,
+        displayMode: 'once',
+        id: 'question',
+        zindex: 999,
+        title: 'Hey',
+        position: 'center',
+        buttons: [['<button><b>YES</b></button>', function (instance, toast) {
+          axios["delete"](_this2.endpoint).then(function (res) {
+            $(_this2.$el).fadeOut(500, function () {
+              _this2.$toast.success(res.data.message, "Success", {
+                timeout: 3000
+              });
             });
           });
-        });
-      }
+          instance.hide({
+            transitionOut: 'fadeOut'
+          }, toast, 'button');
+        }, true], ['<button>NO</button>', function (instance, toast) {
+          instance.hide({
+            transitionOut: 'fadeOut'
+          }, toast, 'button');
+        }]]
+      });
     }
   },
+  // End methods --->
   computed: {
     isInvalid: function isInvalid() {
       return this.body.length < 10;
