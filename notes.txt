@@ -1,5 +1,8 @@
-Three Repo Config
-====================
+Three Repo Config updated
+=========================
+git push github
+git push bitbucket
+git push gitlab
 git push orign master
 
 
