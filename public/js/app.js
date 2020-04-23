@@ -3816,9 +3816,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     destroy: function destroy() {
+      var _this2 = this;
+
       if (confirm("Are you sure?")) {
         axios["delete"](this.endpoint).then(function (res) {
-          alert(res.data.message);
+          $(_this2.$el).fadeOut(500, function () {
+            alert(res.data.message);
+          });
         });
       }
     }
