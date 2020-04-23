@@ -24,7 +24,7 @@ export default {
         },
         update() {
             // axios.patch(route('questions.answer', [$this.questionId, $this.id]), {
-            axios.patch(`/questions/${this.questionId}/answers/${this.id}`, {
+            axios.patch(this.endpoint, {
                 body: this.body
 
             })
@@ -37,12 +37,23 @@ export default {
             .catch(err =>{
                 alert(err.response.data.message);
             });
+        },
+        destroy(){
+            if(confirm("Are you sure?")){
+                axios.delete(this.endpoint)
+                .then(res => {
+                    alert(res.data.message);
+                })
+            }
         }
     },
 
     computed: {
         isInvalid(){
             return this.body.length < 10;
+        },
+        endpoint(){
+            return `/questions/${this.questionId}/answers/${this.id}`;
         }
     }
 }

@@ -3804,7 +3804,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // axios.patch(route('questions.answer', [$this.questionId, $this.id]), {
-      axios.patch("/questions/".concat(this.questionId, "/answers/").concat(this.id), {
+      axios.patch(this.endpoint, {
         body: this.body
       }).then(function (res) {
         // console.log(res);
@@ -3814,11 +3814,21 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         alert(err.response.data.message);
       });
+    },
+    destroy: function destroy() {
+      if (confirm("Are you sure?")) {
+        axios["delete"](this.endpoint).then(function (res) {
+          alert(res.data.message);
+        });
+      }
     }
   },
   computed: {
     isInvalid: function isInvalid() {
       return this.body.length < 10;
+    },
+    endpoint: function endpoint() {
+      return "/questions/".concat(this.questionId, "/answers/").concat(this.id);
     }
   }
 });
