@@ -3879,18 +3879,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['question'],
   data: function data() {
     return {
-      count: this.question.favorite_count,
+      count: this.question.favorites_count,
       isFavorite: this.question.is_favorited,
-      signedIn: false
+      signedIn: true
     };
   },
   computed: {
     classes: function classes() {
-      return ['favorite', 'mt-2', !this.signedIn ? 'off' : this.isFavorite ? 'favorited' : ''];
+      return ['favorite', 'mt-2', !this.signedIn ? 'off' : this.isFavorite > 0 ? 'favorited' : ''];
+    }
+  },
+  methods: {
+    toggle: function toggle() {
+      this.isFavorite ? this["delete"]() : this.create();
+    },
+    "delete": function _delete() {
+      this.count--;
+      this.isFavorite = false;
+    },
+    create: function create() {
+      this.count++;
+      this.isFavorite = true;
     }
   }
 });
@@ -39969,6 +39983,12 @@ var render = function() {
       class: _vm.classes,
       attrs: {
         title: "Click to mark as favorite question (Click again to undo)"
+      },
+      on: {
+        click: function($event) {
+          $event.preventDefault()
+          return _vm.toggle($event)
+        }
       }
     },
     [
