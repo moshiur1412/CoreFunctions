@@ -19,10 +19,10 @@
 </form>
 
 @if($model == $question)
-<favorite :question="{{$model}}"> </favorite>
+    <favorite :question="{{$model}}"> </favorite>
 {{-- @include('shared._favorite') --}}
 @elseif($model == $answer)
-{{-- @include('shared._accept') --}}
+    @include('shared._accept')
 @endif
 
 
