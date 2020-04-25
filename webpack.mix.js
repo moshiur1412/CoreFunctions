@@ -15,8 +15,8 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
 
 
-mix.webpackConfig({
-   watchOptions: {
-         ignored: /node_modules/
-   }
-});
+// mix.webpackConfig({
+//    watchOptions: {
+//          ignored: /node_modules/
+//    }
+// });

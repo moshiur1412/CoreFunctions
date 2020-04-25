@@ -15,7 +15,7 @@ export default {
         return {
             count: this.question.favorites_count,
             isFavorite: this.question.is_favorited,
-            signedIn: true,
+            signedIn: false,
             id: this.question.id
         }
     },
@@ -32,6 +32,13 @@ export default {
     },
     methods: {
         toggle(){
+            if(! this.signedIn){
+                this.$toast.warning("Please login for the favorite", "warning", {
+                    timeout: 3000,
+                    position: 'bottomLeft'
+                });
+                return;
+            }
            this.isFavorite ? this.delete() : this.create();
         },
         delete(){
