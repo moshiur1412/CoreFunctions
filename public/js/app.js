@@ -3886,7 +3886,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       count: this.question.favorites_count,
       isFavorite: this.question.is_favorited,
-      signedIn: false,
       id: this.question.id
     };
   },
@@ -3896,6 +3895,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     endpoint: function endpoint() {
       return "/questions/".concat(this.id, "/favorite");
+    },
+    signedIn: function signedIn() {
+      return window.Auth.signedIn;
     }
   },
   methods: {
