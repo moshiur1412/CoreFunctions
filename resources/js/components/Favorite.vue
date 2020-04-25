@@ -15,7 +15,8 @@ export default {
         return {
             count: this.question.favorites_count,
             isFavorite: this.question.is_favorited,
-            signedIn: true
+            signedIn: true,
+            id: this.question.id
         }
     },
 
@@ -24,6 +25,9 @@ export default {
             return ['favorite', 'mt-2',
             ! this.signedIn ? 'off' : (this.isFavorite > 0 ? 'favorited' : '') 
             ]
+        },
+        endpoint(){
+            return `/questions/${this.id}/favorite`;
         }
     },
     methods: {
@@ -31,12 +35,19 @@ export default {
            this.isFavorite ? this.delete() : this.create();
         },
         delete(){
-            this.count--;
-            this.isFavorite = false;
+            axios.delete(this.endpoint)
+            .then(res =>{
+                this.count--;
+                this.isFavorite = false;
+            });
+            
         },
         create() {
-            this.count++;
-            this.isFavorite = true;
+            axios.post(this.endpoint)
+            .then(res => {
+                this.count++;
+                this.isFavorite = true;
+            });
         }
     }
 }

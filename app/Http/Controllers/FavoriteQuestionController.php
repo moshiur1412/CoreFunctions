@@ -18,11 +18,21 @@ class FavoriteQuestionController extends Controller
 
         $question->favorites()->attach(\Auth()->user()->id);
 
+        if(request()->expectsJson()){
+            return response()->json(null,204);
+        }
         return back();
     }
 
     public function distroy(Question $question){
+        
+        \Log::info('Req=FavoriteQuestionController@distroy Called');
+        
         $question->favorites()->detach(\Auth()->user()->id);
+
+        if(request()->expectsJson()){
+            return response()->json(null, 204);
+        }
         return back();
     }
 }

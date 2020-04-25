@@ -3886,12 +3886,16 @@ __webpack_require__.r(__webpack_exports__);
     return {
       count: this.question.favorites_count,
       isFavorite: this.question.is_favorited,
-      signedIn: true
+      signedIn: true,
+      id: this.question.id
     };
   },
   computed: {
     classes: function classes() {
       return ['favorite', 'mt-2', !this.signedIn ? 'off' : this.isFavorite > 0 ? 'favorited' : ''];
+    },
+    endpoint: function endpoint() {
+      return "/questions/".concat(this.id, "/favorite");
     }
   },
   methods: {
@@ -3899,12 +3903,20 @@ __webpack_require__.r(__webpack_exports__);
       this.isFavorite ? this["delete"]() : this.create();
     },
     "delete": function _delete() {
-      this.count--;
-      this.isFavorite = false;
+      var _this = this;
+
+      axios["delete"](this.endpoint).then(function (res) {
+        _this.count--;
+        _this.isFavorite = false;
+      });
     },
     create: function create() {
-      this.count++;
-      this.isFavorite = true;
+      var _this2 = this;
+
+      axios.post(this.endpoint).then(function (res) {
+        _this2.count++;
+        _this2.isFavorite = true;
+      });
     }
   }
 });

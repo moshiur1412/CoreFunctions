@@ -67,8 +67,8 @@ class Question extends Model
 
     public function favorites()
     {
-        // return $this->belongsToMany(User::class, 'favorites')->withTimestamps(); //, 'question_id', 'user_id');
-        return $this->belongsToMany(User::class, 'favorites', 'question_id', 'user_id')->withTimestamps(); //, 'question_id', 'user_id');
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps(); //, 'question_id', 'user_id');
+        // return $this->belongsToMany(User::class, 'favorites', 'question_id', 'user_id')->withTimestamps(); //, 'question_id', 'user_id');
 
     }
 
@@ -79,7 +79,11 @@ class Question extends Model
    
     public function isFavorited()
     {
-        return $this->favorites()->where('user_id', Auth()->user()->id)->count() > 0;
+        if(auth()->check()){
+
+            return $this->favorites()->where('user_id', Auth()->user()->id)->count() > 0;
+        }
+        return null;
         // dd($this->favorites()->where('user_id', request()->user()->id())->count() > 0);
     }
 
