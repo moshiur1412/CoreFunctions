@@ -10,7 +10,7 @@ class Answer extends Model
     
     protected $guarded = [];
 
-    protected $appends = ['created_date', 'body_html'];
+    protected $appends = ['created_date', 'body_html', 'status', 'is_best'];
 
     public function question(){
         return $this->belongsTo(Question::class);
@@ -54,6 +54,7 @@ class Answer extends Model
 
     public function getStatusAttribute(){
         return $this->isBest() ? 'vote-accepted' : '';
+        // return 'vote-accepted';
     }
 
     public function getIsBestAttribute(){

@@ -3790,13 +3790,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['answer'],
   data: function data() {
     return {
       status: this.answer.status,
-      accepted: this.answer.is_best,
+      isBest: this.answer.is_best,
       canAccept: true,
       id: this.answer.id
     };
@@ -3807,6 +3806,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     classes: function classes() {
       return [this.status, 'mt-4'];
+    }
+  },
+  methods: {
+    acceptedAnswer: function acceptedAnswer() {
+      var _this = this;
+
+      axios.post(this.endpoint).then(function (res) {
+        _this.$toast.success("Answer has been accepted", "sussess", {
+          timeout: 3000,
+          position: "bottomLeft"
+        });
+      });
     }
   }
 });
@@ -40043,24 +40054,21 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.canAccept == true
+    _vm.isBest == false
       ? _c(
           "a",
           {
-            class: { classes: _vm.classes },
-            attrs: { title: "Mark this as a best answer" }
+            attrs: { title: "Mark this as a best answer" },
+            on: { click: _vm.acceptedAnswer }
           },
           [_c("i", { staticClass: "fas fa-check fa-2x" })]
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.canAccept == false
+    _vm.isBest == true
       ? _c(
           "a",
-          {
-            class: { classes: _vm.classes },
-            attrs: { title: "This is the best answer" }
-          },
+          { class: _vm.classes, attrs: { title: "This is the best answer" } },
           [_c("i", { staticClass: "fas fa-check fa-2x" })]
         )
       : _vm._e()
