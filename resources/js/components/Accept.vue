@@ -1,20 +1,19 @@
 <template>
     <div>
-        @can('accept', $answer)
-        <a onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit()" 
-            title="Mark this as a best answer" class="{{ $answer->status }} mt-4">
+
+        <a v-if="canAccept ==true" 
+            title="Mark this as a best answer" :class="{ classes }">
             <i class="fas fa-check fa-2x"></i>
         </a>
-        @else
-            @if($answer->is_best)
-            <a title="This is the best answer" class="{{ $answer->status }} mt-4"> <i class="fas fa-check fa-2x"></i> </a>
-            @endif
-        @endcan
+        <a v-if="canAccept == false" title="This is the best answer" :class="{classes }"> <i class="fas fa-check fa-2x"></i> </a>
+
     </div>
 </template>
+
 <script>
 export default {
     props: ['answer'],
+    
     data(){
         return {
             status: this.answer.status,
@@ -24,8 +23,16 @@ export default {
 
         }
     },
+
     computed: {
-        endpoint: `answers/${this.id}/accept `
+        endpoint(){
+            return `answers/${this.id}/accept`;
+        },
+        classes(){
+            return [
+                this.status, 'mt-4'
+            ]
+        }
     }
 }
 </script>
