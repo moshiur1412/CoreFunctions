@@ -19,7 +19,7 @@ import polices from './polices';
 
 Vue.prototype.authorize = function(policy, model){
 
-    if(window.Auth.signedIn) return false;
+    if(!window.Auth.signedIn) return false;
 
     if(typeof policy == "string" && typeof model == "object"){
 

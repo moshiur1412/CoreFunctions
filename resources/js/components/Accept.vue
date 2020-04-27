@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a v-if="authorize('accept', answer)" @click="create "
+        <a v-if="canAccept" @click="create "
             title="Mark this as a best answer" :class="classes">
             <i class="fas fa-check fa-2x"></i>
         </a>
@@ -29,15 +29,17 @@ export default {
                this.$toast.success(res.data.message, 'Success', {
                    timeout: 3000,
                    position: 'bottomLeft'
-               })
-           });
+               });
+           
+           this.isBest = true;
+           
+           })
        
-        this.isBest = true;
        }
     },  
     computed:{
         canAccept(){
-            return true;
+            return this.authorize('accept', this.answer);
         },
 
         accepted(){
