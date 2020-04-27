@@ -19,6 +19,7 @@ export default {
             isBest: this.answer.is_best,
             canAccept: true,
             id: this.answer.id
+            
 
         }
     },
@@ -34,7 +35,17 @@ export default {
         }
     },
     methods: {
+        signIn(){
+            return Window.auth.signIn;
+        },
         acceptedAnswer(){
+            if(! this.signIn){
+                this.$toast.warning("Please signin for authentication", "warning", {
+                    timeout: 3000,
+                    position: "bottomLeft" 
+                });
+                return;
+            }
             axios.post(this.endpoint)
             .then(res => {
                 this.$toast.success("Answer has been accepted", "sussess", {
