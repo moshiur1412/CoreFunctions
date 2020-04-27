@@ -3794,41 +3794,32 @@ __webpack_require__.r(__webpack_exports__);
   props: ['answer'],
   data: function data() {
     return {
-      status: this.answer.status,
       isBest: this.answer.is_best,
-      canAccept: true,
       id: this.answer.id
     };
   },
-  computed: {
-    endpoint: function endpoint() {
-      return "answers/".concat(this.id, "/accept");
-    },
-    classes: function classes() {
-      return [this.status, 'mt-4'];
-    },
-    signIn: function signIn() {
-      return window.Auth.signedIn;
-    }
-  },
   methods: {
-    acceptedAnswer: function acceptedAnswer() {
+    create: function create() {
       var _this = this;
 
-      if (!this.signIn) {
-        this.$toast.warning("Please signin for authentication", "warning", {
+      axios.post("/answers/".concat(this.id, "/accept")).then(function (res) {
+        _this.$toast.success(res.data.message, 'Success', {
           timeout: 3000,
-          position: "bottomLeft"
-        });
-        return;
-      }
-
-      axios.post(this.endpoint).then(function (res) {
-        _this.$toast.success("Answer has been accepted", "sussess", {
-          timeout: 3000,
-          position: "bottomLeft"
+          position: 'bottomLeft'
         });
       });
+      this.isBest = true;
+    }
+  },
+  computed: {
+    canAccept: function canAccept() {
+      return true;
+    },
+    accepted: function accepted() {
+      return !this.canAccept && this.isBest;
+    },
+    classes: function classes() {
+      return ['mt-4', this.isBest ? 'vote-accepted' : ''];
     }
   }
 });
@@ -40065,19 +40056,19 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.isBest == false
+    _vm.canAccept
       ? _c(
           "a",
           {
             class: _vm.classes,
             attrs: { title: "Mark this as a best answer" },
-            on: { click: _vm.acceptedAnswer }
+            on: { click: _vm.create }
           },
           [_c("i", { staticClass: "fas fa-check fa-2x" })]
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.isBest == true
+    _vm.accepted
       ? _c(
           "a",
           { class: _vm.classes, attrs: { title: "This is the best answer" } },
@@ -52437,14 +52428,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!********************************************!*\
   !*** ./resources/js/components/Accept.vue ***!
   \********************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Accept_vue_vue_type_template_id_315d9f33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Accept.vue?vue&type=template&id=315d9f33& */ "./resources/js/components/Accept.vue?vue&type=template&id=315d9f33&");
 /* harmony import */ var _Accept_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Accept.vue?vue&type=script&lang=js& */ "./resources/js/components/Accept.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Accept_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Accept_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -52474,7 +52466,7 @@ component.options.__file = "resources/js/components/Accept.vue"
 /*!*********************************************************************!*\
   !*** ./resources/js/components/Accept.vue?vue&type=script&lang=js& ***!
   \*********************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
