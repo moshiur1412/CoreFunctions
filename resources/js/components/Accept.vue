@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a v-if="canAccept" @click="create "
+        <a v-if="authorize('accept', answer)" @click="create "
             title="Mark this as a best answer" :class="classes">
             <i class="fas fa-check fa-2x"></i>
         </a>
@@ -17,7 +17,6 @@ export default {
         return {
             isBest: this.answer.is_best,
             id: this.answer.id
-            // user_id: this.answer.question.user_id
 
         }
     },
@@ -38,7 +37,7 @@ export default {
     },  
     computed:{
         canAccept(){
-            return window.Auth.user.id == this.user_id;
+            return true;
         },
 
         accepted(){

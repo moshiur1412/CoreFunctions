@@ -3795,8 +3795,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       isBest: this.answer.is_best,
-      id: this.answer.id // user_id: this.answer.question.user_id
-
+      id: this.answer.id
     };
   },
   methods: {
@@ -3814,7 +3813,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     canAccept: function canAccept() {
-      return window.Auth.user.id == this.user_id;
+      return true;
     },
     accepted: function accepted() {
       return !this.canAccept && this.isBest;
@@ -40057,7 +40056,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.canAccept
+    _vm.authorize("accept", _vm.answer)
       ? _c(
           "a",
           {
@@ -52340,6 +52339,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_izitoast__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_izitoast__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var izitoast_dist_css_iziToast_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! izitoast/dist/css/iziToast.min.css */ "./node_modules/izitoast/dist/css/iziToast.min.css");
 /* harmony import */ var izitoast_dist_css_iziToast_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(izitoast_dist_css_iziToast_min_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _polices__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./polices */ "./resources/js/polices.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -52353,6 +52355,17 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 Vue.use(vue_izitoast__WEBPACK_IMPORTED_MODULE_0___default.a);
+
+
+Vue.prototype.authorize = function (policy, model) {
+  if (window.Auth.signedIn) return false;
+
+  if (typeof policy == "string" && _typeof(model) == "object") {
+    var user = window.Auth.user;
+    return _polices__WEBPACK_IMPORTED_MODULE_2__["default"][policy](user, model); // return policies.modify(user,model);
+    // authorize('modify', answer);
+  }
+};
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -52363,6 +52376,7 @@ Vue.use(vue_izitoast__WEBPACK_IMPORTED_MODULE_0___default.a);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
 
 Vue.component('user-info', __webpack_require__(/*! ./components/UserInfo.vue */ "./resources/js/components/UserInfo.vue")["default"]);
 Vue.component('answer', __webpack_require__(/*! ./components/Answer.vue */ "./resources/js/components/Answer.vue")["default"]);
@@ -52707,6 +52721,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 _fortawesome_fontawesome__WEBPACK_IMPORTED_MODULE_0__["default"].library.add([_fortawesome_fontawesome_free_solid_faCaretUp__WEBPACK_IMPORTED_MODULE_1___default.a, _fortawesome_fontawesome_free_solid_faCaretDown__WEBPACK_IMPORTED_MODULE_2___default.a, _fortawesome_fontawesome_free_solid_faStar__WEBPACK_IMPORTED_MODULE_3___default.a, _fortawesome_fontawesome_free_solid_faCheck__WEBPACK_IMPORTED_MODULE_4___default.a]);
+
+/***/ }),
+
+/***/ "./resources/js/polices.js":
+/*!*********************************!*\
+  !*** ./resources/js/polices.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  modify: function modify(user, model) {
+    return user.id == model.user_id;
+  },
+  accept: function accept(user, answer) {
+    return user.id == answer.question.user_id;
+  }
+});
 
 /***/ }),
 
