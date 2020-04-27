@@ -3952,9 +3952,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     endpoint: function endpoint() {
       return "/questions/".concat(this.id, "/favorite");
-    },
-    signedIn: function signedIn() {
-      return window.Auth.signedIn;
     }
   },
   methods: {
@@ -52358,8 +52355,8 @@ __webpack_require__(/*! ./fontawesome */ "./resources/js/fontawesome.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
-Vue.use(vue_izitoast__WEBPACK_IMPORTED_MODULE_0___default.a);
 
+Vue.use(vue_izitoast__WEBPACK_IMPORTED_MODULE_0___default.a);
 Vue.use(_authorization_authorize__WEBPACK_IMPORTED_MODULE_2__["default"]);
 /**
  * The following block of code may be used to automatically register your
