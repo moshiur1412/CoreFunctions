@@ -3795,7 +3795,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       isBest: this.answer.is_best,
-      id: this.answer.id
+      id: this.answer.id // user_id: this.answer.question.user_id
+
     };
   },
   methods: {
@@ -3813,7 +3814,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     canAccept: function canAccept() {
-      return true;
+      return window.Auth.user.id == this.user_id;
     },
     accepted: function accepted() {
       return !this.canAccept && this.isBest;

@@ -17,6 +17,7 @@ export default {
         return {
             isBest: this.answer.is_best,
             id: this.answer.id
+            // user_id: this.answer.question.user_id
 
         }
     },
@@ -32,12 +33,12 @@ export default {
                })
            });
        
-       this.isBest = true;
+        this.isBest = true;
        }
     },  
     computed:{
         canAccept(){
-            return true;
+            return window.Auth.user.id == this.user_id;
         },
 
         accepted(){
