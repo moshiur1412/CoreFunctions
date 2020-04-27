@@ -3806,12 +3806,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     classes: function classes() {
       return [this.status, 'mt-4'];
+    },
+    signIn: function signIn() {
+      return window.Auth.signedIn;
     }
   },
   methods: {
-    signIn: function signIn() {
-      return Window.auth.signIn;
-    },
     acceptedAnswer: function acceptedAnswer() {
       var _this = this;
 
@@ -40069,6 +40069,7 @@ var render = function() {
       ? _c(
           "a",
           {
+            class: _vm.classes,
             attrs: { title: "Mark this as a best answer" },
             on: { click: _vm.acceptedAnswer }
           },

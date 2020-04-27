@@ -1,7 +1,7 @@
 <template>
     <div>
         <a v-if="isBest == false" @click="acceptedAnswer "
-            title="Mark this as a best answer">
+            title="Mark this as a best answer" :class="classes">
             <i class="fas fa-check fa-2x"></i>
         </a>
         <a v-if="isBest == true" title="This is the best answer" :class="classes"> <i class="fas fa-check fa-2x"></i> </a>
@@ -32,12 +32,13 @@ export default {
             return [
                 this.status, 'mt-4'
             ]
+        },
+        signIn(){
+            return window.Auth.signedIn;
+            
         }
     },
     methods: {
-        signIn(){
-            return Window.auth.signIn;
-        },
         acceptedAnswer(){
             if(! this.signIn){
                 this.$toast.warning("Please signin for authentication", "warning", {
