@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a v-if="canAccept" @click="create "
+        <a v-if="canAccept" @click.prevent="create "
             title="Mark this as a best answer" :class="classes">
             <i class="fas fa-check fa-2x"></i>
         </a>
@@ -31,7 +31,7 @@ export default {
                    position: 'bottomLeft'
                });
            
-           this.isBest = true;
+            this.isBest = true;
            
            })
        
