@@ -31,7 +31,17 @@ class AnswerController extends Controller
             'body' => 'required|max:1000'
         ]);
 
-        $question->answers()->create(['body' => $request->body, 'user_id' => auth()->id() ]);
+        // $answer = $question->answers()->create(['body' => $request->body, 'user_id' => auth()->id() ]);
+        $answer = $question->answers()->create($request->validate([
+            'body' => 'required'
+        ])+ ['user_id' => \Auth::id()]);
+
+        if($request->expectsJson()){
+            return response()->json([
+                'message' => 'Your answer has been submitted successfully',
+                'answer' => $answer
+            ]);
+        }
 
         return back()->with('success', 'Your answer has been submitted successfully.');
     }

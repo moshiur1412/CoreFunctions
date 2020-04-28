@@ -18,7 +18,7 @@
             </div>
         </div>
         </div>
-        <new-answer></new-answer>
+        <new-answer @created="add" :question-id="question.id"></new-answer>
     </div>
 </template>
 <script>
@@ -42,6 +42,10 @@ export default {
     },
 
     methods: {
+        add(answer){
+            this.answers.push(answer);
+            this.count++;
+        },
         remove(index){
             this.answers.splice(index, 1);
             this.count--;

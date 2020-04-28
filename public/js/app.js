@@ -4028,6 +4028,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.fetch("/questions/".concat(this.questionId, "/answers"));
   },
   methods: {
+    add: function add(answer) {
+      this.answers.push(answer);
+      this.count++;
+    },
     remove: function remove(index) {
       this.answers.splice(index, 1);
       this.count--;
@@ -4165,6 +4169,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['questionId'],
   data: function data() {
     return {
       body: ''
@@ -4173,6 +4178,25 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     isInvalid: function isInvalid() {
       return !this.signedIn || this.body.length < 10;
+    }
+  },
+  methods: {
+    create: function create() {
+      var _this = this;
+
+      axios.post("/questions/".concat(this.questionId, "/answers"), {
+        body: this.body
+      })["catch"](function (err) {
+        _this.$toast.error(err.data.message, "Error");
+      }).then(function (_ref) {
+        var data = _ref.data;
+
+        _this.$toast.success(data.message, "success");
+
+        _this.body = '';
+
+        _this.$emit('Created', data.message);
+      });
     }
   }
 });
@@ -40582,7 +40606,10 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("new-answer")
+      _c("new-answer", {
+        attrs: { "question-id": _vm.question.id },
+        on: { created: _vm.add }
+      })
     ],
     1
   )
@@ -40660,44 +40687,57 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c("form", [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "body" } }, [_vm._v("Your Answer:")]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.body,
-                    expression: "body"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { name: "body", id: "body", cols: "30", rows: "10" },
-                domProps: { value: _vm.body },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.body = $event.target.value
-                  }
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.create($event)
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-secondary",
-                  attrs: { type: "submit", disabled: _vm.isInvalid }
-                },
-                [_vm._v("Submit ")]
-              )
-            ])
-          ])
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "body" } }, [
+                  _vm._v("Your Answer:")
+                ]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.body,
+                      expression: "body"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "body", id: "body", cols: "30", rows: "10" },
+                  domProps: { value: _vm.body },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.body = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-secondary",
+                    attrs: { type: "submit", disabled: _vm.isInvalid }
+                  },
+                  [_vm._v("Submit ")]
+                )
+              ])
+            ]
+          )
         ])
       ])
     ])

@@ -7,7 +7,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form>
+                    <form @submit.prevent="create">
                         
                         <div class="form-group">
                             <label for="body">Your Answer:</label>
@@ -27,6 +27,7 @@
 
 <script>
 export default {
+    props: ['questionId'],
     data(){
         return {
             body: ''
@@ -35,6 +36,21 @@ export default {
     computed: {
         isInvalid (){
             return !this.signedIn || this.body.length < 10;
+        }
+    },
+    methods:{
+        create(){
+            axios.post(`/questions/${this.questionId}/answers`, {
+                body: this.body
+            })
+            .catch(err => {
+                this.$toast.error(err.data.message, "Error");
+            })
+            .then(({data}) =>{
+                this.$toast.success(data.message, "success");
+                this.body = '';
+                this.$emit('Created', data.message);
+            })
         }
     }
 }
