@@ -30,6 +30,7 @@ export default {
                    timeout: 3000,
                    position: 'bottomLeft'
                });
+            
             this.isBest = true;
            
            })

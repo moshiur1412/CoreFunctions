@@ -4063,7 +4063,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['model', 'name'],
   data: function data() {
     return {
-      count: this.model.votes_count
+      count: this.model.votes_count,
+      id: this.model.id
     };
   },
   components: {
@@ -4073,6 +4074,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     classes: function classes() {
       return this.SignedIn ? '' : 'off';
+    },
+    endpoint: function endpoint() {
+      return "/".concat(this.name, "s/").concat(this.id, "/vote");
     }
   },
   methods: {
@@ -4081,7 +4085,27 @@ __webpack_require__.r(__webpack_exports__);
         up: "This ".concat(this.name, " is useful"),
         down: "This ".concat(this.name, " is not useful")
       };
-      return voteType[titles];
+      return titles[voteType];
+    },
+    voteUp: function voteUp() {
+      this._vote(1);
+    },
+    voteDown: function voteDown() {
+      this._vote(-1);
+    },
+    _vote: function _vote(vote) {
+      var _this = this;
+
+      axios.post(this.endpoint, {
+        vote: vote
+      }).then(function (res) {
+        _this.$toast.success(res.data.message, "Success", {
+          timeout: 3000,
+          position: 'bottomLeft'
+        });
+
+        _this.count += vote;
+      });
     }
   }
 });
@@ -40256,7 +40280,13 @@ var render = function() {
         {
           staticClass: "vote-up",
           class: _vm.classes,
-          attrs: { title: _vm.title("up") }
+          attrs: { title: _vm.title("up") },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.voteUp($event)
+            }
+          }
         },
         [_c("i", { staticClass: "fas fa-caret-up fa-3x" })]
       ),
@@ -40270,7 +40300,13 @@ var render = function() {
         {
           staticClass: "vote-down",
           class: _vm.classes,
-          attrs: { title: _vm.title("down") }
+          attrs: { title: _vm.title("down") },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.voteDown($event)
+            }
+          }
         },
         [_c("i", { staticClass: "fas fa-caret-down fa-3x" })]
       ),
