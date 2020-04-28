@@ -4279,7 +4279,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['model', 'name'],
   data: function data() {
     return {
-      count: this.model.votes_count,
+      count: this.model.votes_count || 0,
       id: this.model.id
     };
   },
