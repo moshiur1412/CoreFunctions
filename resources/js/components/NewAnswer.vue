@@ -49,7 +49,7 @@ export default {
             .then(({data}) =>{
                 this.$toast.success(data.message, "success");
                 this.body = '';
-                this.$emit('Created', data.message);
+                this.$emit('created', data.answer);
             })
         }
     }

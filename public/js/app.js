@@ -4195,7 +4195,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.body = '';
 
-        _this.$emit('Created', data.message);
+        _this.$emit('created', data.answer);
       });
     }
   }
