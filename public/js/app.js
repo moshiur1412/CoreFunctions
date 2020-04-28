@@ -4096,6 +4096,13 @@ __webpack_require__.r(__webpack_exports__);
     _vote: function _vote(vote) {
       var _this = this;
 
+      if (!this.SignedIn) {
+        this.$toast.warning("Please login to vote the ".concat(this.name), 'Warning', {
+          timeout: 3000,
+          position: 'bottomLeft'
+        });
+      }
+
       axios.post(this.endpoint, {
         vote: vote
       }).then(function (res) {
@@ -4104,7 +4111,7 @@ __webpack_require__.r(__webpack_exports__);
           position: 'bottomLeft'
         });
 
-        _this.count += vote;
+        _this.count = res.data.voteCount;
       });
     }
   }

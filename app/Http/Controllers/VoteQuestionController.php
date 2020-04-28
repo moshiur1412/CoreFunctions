@@ -18,15 +18,17 @@ class VoteQuestionController extends Controller
         \Log::info('Req=VoteQuestionController@invoke called');
 
         $vote = (int) request()->vote;
-        auth()->user()->voteQuestion($question, $vote);
+        
+        $voteCount = auth()->user()->voteQuestion($question, $vote);
 
         if(request()->expectsJson()){      
             return response()->json([
-                'message' => 'Thank you for your feedback'
+                'message' => 'Thank you for your feedback',
+                'voteCount' => $voteCount
             ]);
 
         }
-        
+
         return back();
     }
 }

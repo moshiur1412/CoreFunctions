@@ -58,6 +58,12 @@ export default {
             this._vote(-1);
         },
         _vote(vote){
+            if(!this.SignedIn){
+                this.$toast.warning(`Please login to vote the ${this.name}`,'Warning',{
+                    timeout: 3000,
+                    position: 'bottomLeft'
+                });
+            }
             axios.post(this.endpoint, {vote})
             .then(res =>{
                 this.$toast.success(res.data.message, "Success", {
@@ -65,7 +71,7 @@ export default {
                     position: 'bottomLeft'
                 })
 
-                this.count += vote;
+                this.count = res.data.voteCount;
             });
         }
     }
