@@ -40,7 +40,7 @@
                             <div class="row">
                                 <div class="col-4">
                                 <a v-if="authorize('modify', question)" @click.prevent="edit" class="btn btn-outline-secondary mr-2" >Edit</a>
-                                <button v-if="authorize('modify', question)" class="btn btn-outline-danger" type="submit" @click="destroy"> Delete </button>
+                                <button v-if="authorize('deleteQuestion', question)" class="btn btn-outline-danger" type="submit" @click="destroy"> Delete </button>
 
                                 </div>
                                 <div class="col-4"></div>

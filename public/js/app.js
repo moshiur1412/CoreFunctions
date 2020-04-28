@@ -41067,7 +41067,7 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.authorize("modify", _vm.question)
+                      _vm.authorize("deleteQuestion", _vm.question)
                         ? _c(
                             "button",
                             {
@@ -53490,6 +53490,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   accept: function accept(user, answer) {
     return user.id == answer.question.user_id;
+  },
+  deleteQuestion: function deleteQuestion(user, question) {
+    return user.id == question.user_id && question.answers_count < 1;
   }
 });
 
