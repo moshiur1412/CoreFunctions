@@ -48,11 +48,12 @@
     </div><!--\* end row class -->
 
 
+<answers :answers="{{$question->answers }}" :count="{{$question->answers_count}}"></answers>
 
-    @include('answers._index', [
+    {{-- @include('answers._index', [
        'answersCount' =>  $question->answers_count,
        'answers' => $question->answers,
-    ])
+    ]) --}}
 
     @include('answers._create')
 
