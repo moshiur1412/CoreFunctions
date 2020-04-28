@@ -1,5 +1,6 @@
 <template>
-    <div class="row mt-4" v-cloak v-if="count">
+    <div>
+        <div class="row mt-4" v-cloak v-if="count">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -16,12 +17,14 @@
                 </div>
             </div>
         </div>
+        </div>
+        <new-answer></new-answer>
     </div>
 </template>
 <script>
 
 import Answer from './Answer.vue';
-
+import NewAnswer from './NewAnswer';
 export default {
     props: ['question'],
    
@@ -57,6 +60,6 @@ export default {
             return this.count + " " + (this.count > 1 ? "Answers" : "Answer");
         }
     },
-    components:{ Answer }
+    components:{ Answer, NewAnswer }
 }
 </script>
