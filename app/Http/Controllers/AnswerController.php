@@ -39,7 +39,7 @@ class AnswerController extends Controller
         if($request->expectsJson()){
             return response()->json([
                 'message' => 'Your answer has been submitted successfully',
-                'answer' => $answer
+                'answer' => $answer->load('user')
             ]);
         }
 
