@@ -1,16 +1,18 @@
 <template>
-    <div>
-        <div class="row mt-5" v-cloak v-if="count">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title mt-2">
-                            <h2> {{ title }}</h2>
-                        </div>
+    <div class="row mt-4" v-cloak v-if="count">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h2> {{ title }}</h2>
                     </div>
+                    <hr>
+
+                    <answer v-for="answer in answers" :answer="answer" :key="answer.id"></answer>
                     
-                     <answer v-for="answer in answers" :answer="answer" :key="answer.id"></answer>
-                  
+                    <div class="text-center m-3" v-if="nextUrl">
+                        <button class="btn btn-outline-secondary" @click.prevent="fetch(nextUrl)">Load more answers</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -18,18 +20,39 @@
 </template>
 <script>
 
-import Answer from './Answer';
+import Answer from './Answer.vue';
 
 export default {
-    props: ['answers', 'count'],
+    props: ['question'],
    
+    data() {
+        return {
+            questionId: this.question.id,
+            count: this.question.answers_count,
+            answers: [],
+            nextUrl: null,
+        }
+    },
+
+    created() {
+        this.fetch(`/questions/${this.questionId}/answers`);
+    },
+
+    methods: {
+        fetch(endpoint){
+            axios.get(endpoint)
+            .then(({data})=>{
+                console.log(data);
+                this.answers.push(...data.data);
+                this.nextUrl= data.next_page_url;
+            })
+        }
+    },
     computed: {
         title(){
             return this.count + " " + (this.count > 1 ? "Answers" : "Answer");
         }
     },
-    components:{
-        Answer
-    }
+    components:{ Answer }
 }
 </script>

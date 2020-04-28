@@ -32,7 +32,9 @@ class RouteServiceProvider extends ServiceProvider
             //     $query->orderBy('votes_count','DESC');
             // }])->where('slug', $slug)->first() ?? abort(404);
 
-            return Question::with(['user','answers.user'])->where('slug', $slug)->first() ?? abort(404);
+            // return Question::with(['user','answers.user'])->where('slug', $slug)->first() ?? abort(404);
+
+            return Question::with('user')->where('slug', $slug)->first() ?? abort(404);
 
         });
 
