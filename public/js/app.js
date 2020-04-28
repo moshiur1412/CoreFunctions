@@ -4250,14 +4250,113 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['question'],
   data: function data() {
     return {
       title: this.question.title,
       body: this.question.body,
-      bodyHtml: this.question.body_html
+      bodyHtml: this.question.body_html,
+      id: this.question.id,
+      editing: false,
+      beforeCache: {}
     };
+  },
+  methods: {
+    edit: function edit() {
+      this.beforeCache = {
+        body: this.body,
+        title: this.title
+      };
+      this.editing = true;
+    },
+    cancel: function cancel() {
+      this.body = this.beforeCache.body;
+      this.title = this.beforeCache.title;
+      this.editing = false;
+    },
+    update: function update() {
+      var _this = this;
+
+      axios.put(this.endpoint, {
+        title: this.title,
+        body: this.body
+      })["catch"](function (err) {
+        _this.$toast.error(err.data.message, "Error", {
+          timeout: 3000
+        });
+      }).then(function (_ref) {
+        var data = _ref.data;
+        _this.body = data.body_html;
+
+        _this.$toast.success(data.message, "Success", {
+          timeout: 3000
+        });
+
+        _this.editing = false;
+      });
+    },
+    destroy: function destroy() {
+      var _this2 = this;
+
+      this.$toast.question("Are you sure about that?", "Confirm", {
+        timeout: 20000,
+        close: false,
+        overlay: true,
+        displayMode: 'once',
+        id: 'question',
+        zindex: 999,
+        title: 'Hey',
+        position: 'center',
+        buttons: [['<button><b>YES</b></button>', function (instance, toast) {
+          axios["delete"](_this2.endpoint).then(function (_ref2) {
+            var data = _ref2.data;
+
+            _this2.$toast.success(data.message, 'success', {
+              timeout: 2000
+            });
+          });
+          setTimeout(function () {
+            window.location.href = "/questions";
+          }, 3000);
+          instance.hide({
+            transitionOut: 'fadeOut'
+          }, toast, 'button');
+        }, true], ['<button>NO</button>', function (instance, toast) {
+          instance.hide({
+            transitionOut: 'fadeOut'
+          }, toast, 'button');
+        }]]
+      });
+    }
+  },
+  computed: {
+    isInvalid: function isInvalid() {
+      return this.title.length < 10 && this.body.length < 10;
+    },
+    endpoint: function endpoint() {
+      return "/questions/".concat(this.id);
+    }
   }
 });
 
@@ -40837,49 +40936,166 @@ var render = function() {
   return _c("div", { staticClass: "row justify-content-center" }, [
     _c("div", { staticClass: "col-md-12" }, [
       _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "card-title" }, [
-            _c("div", { staticClass: "d-flex align-items-center" }, [
-              _c("h1", [_vm._v(" " + _vm._s(_vm.title))]),
-              _vm._v(" "),
-              _vm._m(0)
-            ])
-          ]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("div", { staticClass: "media" }, [
-            _c(
-              "div",
-              { staticClass: "d-fex flex-column vote-controls" },
+        _vm.editing
+          ? _c(
+              "form",
+              {
+                staticClass: "card-body",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.update($event)
+                  }
+                }
+              },
               [
-                _c("vote", { attrs: { model: _vm.question, name: "question" } })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "media-body" }, [
-              _c("div", { domProps: { innerHTML: _vm._s(_vm.bodyHtml) } }),
+                _c("div", { staticClass: "card-title" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.title,
+                        expression: "title"
+                      }
+                    ],
+                    staticClass: "form-control form-control-lg",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.title = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "media" }, [
+                  _c("div", { staticClass: "media-body" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.body,
+                            expression: "body"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { rows: "10" },
+                        domProps: { value: _vm.body },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.body = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { disabled: _vm.isInvalid }
+                      },
+                      [_vm._v(" Update ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-secondary",
+                        attrs: { type: "button" },
+                        on: { click: _vm.cancel }
+                      },
+                      [_vm._v(" Cancel ")]
+                    )
+                  ])
+                ])
+              ]
+            )
+          : _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "card-title" }, [
+                _c("div", { staticClass: "d-flex align-items-center" }, [
+                  _c("h1", [_vm._v(" " + _vm._s(_vm.title))]),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ])
+              ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-4" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-4" }),
-                _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", { staticClass: "media" }, [
                 _c(
                   "div",
-                  { staticClass: "col-4" },
+                  { staticClass: "d-fex flex-column vote-controls" },
                   [
-                    _c("user-info", {
-                      attrs: { model: _vm.question, label: "Asked" }
+                    _c("vote", {
+                      attrs: { model: _vm.question, name: "question" }
                     })
                   ],
                   1
-                )
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "media-body" }, [
+                  _c("div", { domProps: { innerHTML: _vm._s(_vm.bodyHtml) } }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-4" }, [
+                      _vm.authorize("modify", _vm.question)
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-outline-secondary mr-2",
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.edit($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Edit")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.authorize("modify", _vm.question)
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-danger",
+                              attrs: { type: "submit" },
+                              on: { click: _vm.destroy }
+                            },
+                            [_vm._v(" Delete ")]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-4" }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-4" },
+                      [
+                        _c("user-info", {
+                          attrs: { model: _vm.question, label: "Asked" }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ])
               ])
             ])
-          ])
-        ])
       ])
     ])
   ])
