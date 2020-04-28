@@ -36,8 +36,17 @@
         </div>
     </div>
 </template>
+
 <script>
+
+import Vote from './Vote.vue';
+import UserInfo from './UserInfo.vue';
+
+
 export default {
+    components:{
+        Vote, UserInfo
+    },
     props: ['answer'],
 
     data(){
