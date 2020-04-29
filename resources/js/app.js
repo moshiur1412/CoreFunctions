@@ -31,6 +31,9 @@ Vue.use(Authorization);
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('question-page', require('./pages/QuestionPage.vue').default);
+Vue.component('task-component', require('./API/Task.vue').default);
+
+// import TaskComponent from './components/Task.vue';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
