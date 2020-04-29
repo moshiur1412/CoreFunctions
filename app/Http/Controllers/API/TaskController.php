@@ -22,7 +22,8 @@ class TaskController extends Controller
                 'tasks' => $task
             ]);
         }
-        $tasks = json_encode($task);
+        // $tasks = response($task->jsonSerialize(), 240);
+        $tasks = json_encode($task::all());
 
         // return response()->json($task::all());
         return response()->view('tasks.index', compact('tasks'));

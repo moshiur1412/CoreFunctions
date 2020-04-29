@@ -3797,6 +3797,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['tasks']
 });
@@ -40537,35 +40539,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("table", { staticClass: "table" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "tbody",
+      _vm._l(_vm.tasks, function(task) {
+        return _c("tr", { key: task.id, attrs: { tasks: _vm.tasks } }, [
+          _c("th", { attrs: { scope: "row" } }, [
+            _vm._v(" " + _vm._s(task.id) + " ")
+          ]),
+          _vm._v(" "),
+          _c("th", [_vm._v(" " + _vm._s(task.title) + " ")]),
+          _vm._v(" "),
+          _c("th", [_vm._v(" " + _vm._s(task.priority) + " ")]),
+          _vm._v(" "),
+          _c("th", [_vm._v(" Edit | Remove ")])
+        ])
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "table" }, [
-      _c("thead", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v(" ID ")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Title ")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Priority ")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Actions ")])
-      ]),
+    return _c("thead", [
+      _c("th", { attrs: { scope: "col" } }, [_vm._v(" ID ")]),
       _vm._v(" "),
-      _c("tbody", [
-        _c("tr", [
-          _c("th", { attrs: { scope: "row" } }, [_vm._v(" 1 ")]),
-          _vm._v(" "),
-          _c("th", [_vm._v(" your title ")]),
-          _vm._v(" "),
-          _c("th", [_vm._v(" lopw ")]),
-          _vm._v(" "),
-          _c("th", [_vm._v(" Edit | Remove ")])
-        ])
-      ])
+      _c("th", { attrs: { scope: "col" } }, [_vm._v(" Title ")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v(" Priority ")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v(" Actions ")])
     ])
   }
 ]
