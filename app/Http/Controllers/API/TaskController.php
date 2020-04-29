@@ -13,11 +13,19 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Task $task)
     {
         \Log::info('Req=API/TaskController@index Called');
 
-        return view('tasks.index');
+        if(request()->expectsJson()){
+            return response()-json([
+                'tasks' => $task
+            ]);
+        }
+        $tasks = json_encode($task);
+
+        // return response()->json($task::all());
+        return response()->view('tasks.index', compact('tasks'));
     }
 
     /**
