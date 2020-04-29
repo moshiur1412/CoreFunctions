@@ -3,7 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <task-component :tasks="{{$tasks}}"></task-component>
+        {{-- <app-component :tasks="{{$tasks}}"></app-component> --}}
+        <app-component ></app-component>
+
     </div>
 
 </div>

@@ -17,18 +17,24 @@ class TaskController extends Controller
     {
         \Log::info('Req=API/TaskController@index Called');
 
-        // if(request()->expectsJson()){
-        //     return response()-json([
-        //         'tasks' => $task
-        //     ]);
-        // }
-
-        // $tasks = json_encode($task::all());
+        
         // $tasks = response()->json($task::paginate(10));
-        $tasks = json_encode($task->paginate(5));
+        // $tasks = json_encode($task->paginate(5));
+        
+        if(request()->expectsJson()){
+            return response()-json($task::all());
+        }
+        // $tasks = null;
+        $tasks = json_encode($task::all());
 
         // return response()->json($task::paginate(10));
         return response()->view('tasks.index', compact('tasks'));
+    }
+
+    public function taskList(Task $task){
+
+        $task = $task::all();
+        return response()->json($task);
     }
 
     /**
@@ -60,7 +66,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        $tasks = json_encode($task->paginate(5));
+        return view('tasks.show', compact('task'));
     }
 
     /**

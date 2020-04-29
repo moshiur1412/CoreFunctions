@@ -21,3 +21,4 @@ use Illuminate\Http\Request;
 Route::resource('questions', 'QuestionController');
 
 Route::resource('tasks', 'API\TaskController');
+Route::get('task_list','API\TaskController@taskList');
