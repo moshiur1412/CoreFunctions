@@ -3806,6 +3806,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   // props: ['tasks'],
@@ -3824,11 +3828,13 @@ __webpack_require__.r(__webpack_exports__);
 
       window.axios.get('/api/task_list').then(function (_ref) {
         var data = _ref.data;
-        data.forEach(function (task) {
+        console.log(data);
+        data.data.forEach(function (task) {
           _this.task_list.push(task);
         }); //    console.log(data);
       });
-    }
+    },
+    loadData: function loadData(nextUrl) {}
   },
   created: function created() {
     this.getTask();
@@ -40604,6 +40610,25 @@ var render = function() {
           return _c("task-component", { key: task.id, attrs: { task: task } })
         }),
         _vm._v(" "),
+        _c("tr", { staticClass: "text-center" }, [
+          _c("td"),
+          _vm._v(" "),
+          _c("td", { attrs: { colspan: "2" } }, [
+            _c(
+              "button",
+              {
+                staticClass: "form-control btn btn-outline-secondary",
+                on: {
+                  click: function($event) {
+                    return _vm.loadData(_vm.nextUrl)
+                  }
+                }
+              },
+              [_vm._v(" More data load... ")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
         _vm._m(1)
       ],
       2
@@ -40655,11 +40680,9 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("td", [
-        _c(
-          "button",
-          { staticClass: " form-control btn btn-outline-secondary" },
-          [_vm._v(" Submit ")]
-        )
+        _c("button", { staticClass: " form-control btn btn-outline-primary" }, [
+          _vm._v(" Submit ")
+        ])
       ])
     ])
   }

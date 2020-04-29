@@ -8,6 +8,10 @@
         </thead>
         <tbody>
             <task-component v-for="task in task_list" :key="task.id" :task="task"></task-component>
+            <tr class="text-center">
+                <td></td>
+                <td colspan="2"><button @click="loadData(nextUrl)" class="form-control btn btn-outline-secondary"> More data load... </button></td>
+            </tr>
             <tr>
                 <td colspan="2"><input type="text" class="form-control" placeholder="Write your title here.."></td>
                 <td>
@@ -17,7 +21,7 @@
                         <option value=""> High </option>
                     </select>
                 </td>
-                <td> <button class=" form-control btn btn-outline-secondary"> Submit </button></td>
+                <td> <button class=" form-control btn btn-outline-primary"> Submit </button></td>
             </tr>
         </tbody>
     </table>
@@ -45,11 +49,16 @@ export default {
        getTask(){
            window.axios.get('/api/task_list')
            .then(({data}) =>{
-               data.forEach(task => {
+               console.log(data);
+               data.data.forEach(task => {
                    this.task_list.push(task)
                });
             //    console.log(data);
            });
+       },
+
+       loadData(nextUrl){
+
        }
    },
    created(){

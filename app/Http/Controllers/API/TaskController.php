@@ -22,7 +22,7 @@ class TaskController extends Controller
         // $tasks = json_encode($task->paginate(5));
         
         if(request()->expectsJson()){
-            return response()-json($task::all());
+            return json_encode($task::all());
         }
         // $tasks = null;
         $tasks = json_encode($task::all());
@@ -33,8 +33,10 @@ class TaskController extends Controller
 
     public function taskList(Task $task){
 
-        $task = $task::all();
-        return response()->json($task);
+        // $task = $task::all();
+        // return json_encode($task::paginate(5));
+         return json_encode($task::paginate(5));
+
     }
 
     /**
