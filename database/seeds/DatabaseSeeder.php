@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UsersQuestionsAnswersTableSeeder::class,
             FavoritesTableSeeder::class,
             VotableTableSeeder::class,
+            TaskTableSeeder::class,
 
         ]);
     }
