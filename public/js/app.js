@@ -3800,7 +3800,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['tasks']
+  props: ['tasks'],
+  data: function data() {
+    return {
+      id: this.tasks.data.id,
+      task_list: this.tasks.data,
+      title: this.task
+    };
+  },
+  computed: {
+    titlem: function titlem() {
+      return;
+      this.tasks.id;
+    }
+  }
 });
 
 /***/ }),
@@ -40544,8 +40557,8 @@ var render = function() {
     _vm._v(" "),
     _c(
       "tbody",
-      _vm._l(_vm.tasks, function(task) {
-        return _c("tr", { key: task.id, attrs: { tasks: _vm.tasks } }, [
+      _vm._l(_vm.task_list, function(task) {
+        return _c("tr", { key: task.id }, [
           _c("th", { attrs: { scope: "row" } }, [
             _vm._v(" " + _vm._s(task.id) + " ")
           ]),

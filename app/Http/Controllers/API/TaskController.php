@@ -17,15 +17,17 @@ class TaskController extends Controller
     {
         \Log::info('Req=API/TaskController@index Called');
 
-        if(request()->expectsJson()){
-            return response()-json([
-                'tasks' => $task
-            ]);
-        }
-        // $tasks = response($task->jsonSerialize(), 240);
-        $tasks = json_encode($task::all());
+        // if(request()->expectsJson()){
+        //     return response()-json([
+        //         'tasks' => $task
+        //     ]);
+        // }
 
-        // return response()->json($task::all());
+        // $tasks = json_encode($task::all());
+        // $tasks = response()->json($task::paginate(10));
+        $tasks = json_encode($task->paginate(5));
+
+        // return response()->json($task::paginate(10));
         return response()->view('tasks.index', compact('tasks'));
     }
 
