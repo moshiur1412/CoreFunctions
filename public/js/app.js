@@ -3822,8 +3822,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       task_list: [],
       nextUrl: null,
-      title: '',
-      priority: ''
+      task: {
+        title: '',
+        priority: ''
+      }
     };
   },
   methods: {
@@ -3832,7 +3834,7 @@ __webpack_require__.r(__webpack_exports__);
 
       window.axios.get('/api/tasks').then(function (_ref) {
         var data = _ref.data;
-        console.log(data);
+        // console.log(data);
         _this.nextUrl = data.next_page_url;
         data.data.forEach(function (task) {
           _this.task_list.push(task);
@@ -3844,16 +3846,25 @@ __webpack_require__.r(__webpack_exports__);
 
       window.axios.get(this.nextUrl).then(function (_ref2) {
         var data = _ref2.data;
-        _this2.nextUrl = data.next_page_url;
-        console.log(data);
+        _this2.nextUrl = data.next_page_url; //    console.log(data);
+
         data.data.forEach(function (task) {
           _this2.task_list.push(task);
-        }); // this.task_list.push(...data.data.task)
-        //    console.log(data);
+        });
       });
     },
     store: function store() {
-      console.log(this.title);
+      var _this3 = this;
+
+      axios.post("/api/tasks", this.task).then(function (res) {
+        console.log(res);
+
+        _this3.$toast.success(res.data.message, 'success', {
+          timeout: 3000
+        });
+
+        _this3.task_list.push(res.data.task);
+      }); //    console.log(this.title);
     }
   },
   created: function created() {
@@ -40658,19 +40669,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.title,
-                  expression: "title"
+                  value: _vm.task.title,
+                  expression: "task.title"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", placeholder: "Write your title here.." },
-              domProps: { value: _vm.title },
+              domProps: { value: _vm.task.title },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.title = $event.target.value
+                  _vm.$set(_vm.task, "title", $event.target.value)
                 }
               }
             })
@@ -40684,12 +40695,11 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.priority,
-                    expression: "priority"
+                    value: _vm.task.priority,
+                    expression: "task.priority"
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { id: "select" },
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -40700,18 +40710,20 @@ var render = function() {
                         var val = "_value" in o ? o._value : o.value
                         return val
                       })
-                    _vm.priority = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
+                    _vm.$set(
+                      _vm.task,
+                      "priority",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
                   }
                 }
               },
               [
-                _c("option", { attrs: { value: "" } }, [_vm._v(" Low ")]),
+                _c("option", [_vm._v(" Low ")]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "" } }, [_vm._v(" Medium ")]),
+                _c("option", [_vm._v(" Medium ")]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "" } }, [_vm._v(" High ")])
+                _c("option", [_vm._v(" High ")])
               ]
             )
           ]),

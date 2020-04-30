@@ -18,7 +18,7 @@ class TaskController extends Controller
         \Log::info('Req=API/TaskController@index Called');
 
         if(request()->expectsJson()){
-            return json_encode($task::paginate(5));
+            return json_encode($task::orderBy('id','DESC')->paginate(5));
         }
         $tasks = json_encode($task::all());
 
@@ -29,7 +29,7 @@ class TaskController extends Controller
 
         // $task = $task::all();
         // return json_encode($task::paginate(5));
-         return json_encode($task::paginate(5));
+         return $task::all()->jsonSerialize();
 
     }
 
@@ -49,9 +49,22 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Task $task, Request $request)
     {
-        //
+        \Log::info('Req=API/TaskController@store Called');
+
+        
+        $task->title = $request->title;
+        $task->priority = $request->priority;
+        $task->save();
+
+        if($request->expectsJson()){
+            return response()->json([
+                'message' => 'You have successfully created task',
+                'task' => $task->jsonSerialize()
+            ]);
+        }
+        return back();
     }
 
     /**
