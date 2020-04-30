@@ -3845,7 +3845,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3940,7 +3939,18 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.task.id);
     },
     remove: function remove() {
-      this.$emit('Delete');
+      var _this = this;
+
+      // this.$emit('Delete');
+      window.axios["delete"]("api/tasks/".concat(this.task.id))["catch"](function (err) {
+        console.log(err.response);
+
+        _this.$toast.error(err.response.status + "\t" + err.response.statusText, "Error");
+      }).then(function (res) {
+        console.log(res);
+
+        _this.$toast.success(res.data.message, "Success");
+      });
     }
   }
 });

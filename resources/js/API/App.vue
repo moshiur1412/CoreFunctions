@@ -10,7 +10,6 @@
 
             <task-component v-for="task in task_list" :key="task.id" :task="task"></task-component>
             
-            
             <tr class="text-center">
                 <td></td>
                 <td colspan="2"><button v-if="nextUrl" @click="loadData(nextUrl)" class="form-control btn btn-outline-secondary"> More data load... </button></td>

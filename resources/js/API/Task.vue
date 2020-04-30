@@ -25,7 +25,16 @@ export default {
             console.log(this.task.id);
         },
         remove(){
-            this.$emit('Delete');
+            // this.$emit('Delete');
+            window.axios.delete(`api/tasks/${this.task.id}`)
+            .catch(err=>{
+                console.log(err.response);
+                this.$toast.error(err.response.status  + "\t"+ err.response.statusText, "Error");
+            })
+            .then(res=>{
+                console.log(res);
+                this.$toast.success(res.data.message, "Success");
+            });
         }
     }
     
