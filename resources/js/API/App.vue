@@ -1,5 +1,5 @@
 <template>
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <th scope="col"> ID </th>
             <th scope="col"> Title </th>
@@ -8,11 +8,19 @@
         </thead>
         <tbody>
 
-            <task-component v-for="task in task_list" :key="task.id" :task="task" @delete="remove" @edit="updated"></task-component>
-            
-            <tr class="text-center">
-                <td></td>
-                <td colspan="2"><button v-if="nextUrl" @click="loadData(nextUrl)" class="form-control btn btn-outline-secondary"> More data load... </button></td>
+            <task-component v-for="task in task_list" :key="task.id" :task="task" @delete="remove" @edit="update"></task-component>
+
+          
+            <!-- Spinner loading  -->
+            <tr v-if="isLoading">
+                <td colspan="4"> 
+                    <div class="d-flex justify-content-center">
+                        <Stretch></Stretch>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"><button v-if="nextUrl" @click="loadData(nextUrl)" class="form-control btn btn-outline-secondary"> More data load... </button></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="text" v-model="task.title" class="form-control" placeholder="Write your title here.."></td>
@@ -34,15 +42,18 @@
 
 import TaskComponent from './Task.vue';
 
+import {Stretch} from 'vue-loading-spinner';
+
 export default {
     components: {
-        TaskComponent
+        TaskComponent, Stretch
     },
     data(){
         return {
             task_list: [],
             nextUrl: null,
-            task: {  title: '', priority: ''}
+            task: {  title: '', priority: ''},
+            isLoading: false
            
         }
     },
@@ -61,11 +72,13 @@ export default {
 
 
        loadData(nextUrl){
+           this.isLoading = true;
            window.axios.get(this.nextUrl)
            .then(({data}) =>{
                this.nextUrl = data.next_page_url;
                data.data.forEach(task =>{
                    this.task_list.push(task);
+                   this.isLoading =false;
                })
            });
        },
@@ -82,6 +95,10 @@ export default {
                this.task = '';
            });
         
+       },
+       update(id){
+           console.log(id);
+
        },
        remove(id){
             window.axios.delete(`/api/tasks/${id}`)
