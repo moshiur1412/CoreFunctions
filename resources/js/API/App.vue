@@ -78,7 +78,7 @@ export default {
            .then(res=>{
                console.log(res);
                this.$toast.success(res.data.message, 'success', {timeout:3000});
-               this.task_list.push(res.data.task)
+               this.task_list.push(res.data.task,0)
            });
         //    console.log(this.title);
        }

@@ -119,6 +119,28 @@ module.exports = { prefix: 'fas', iconName: 'check', icon: [512, 512, [], "f00c"
 
 /***/ }),
 
+/***/ "./node_modules/@fortawesome/fontawesome-free-solid/faEdit.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@fortawesome/fontawesome-free-solid/faEdit.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = { prefix: 'fas', iconName: 'edit', icon: [576, 512, [], "f044", "M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"] };
+
+/***/ }),
+
+/***/ "./node_modules/@fortawesome/fontawesome-free-solid/faEye.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@fortawesome/fontawesome-free-solid/faEye.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = { prefix: 'fas', iconName: 'eye', icon: [576, 512, [], "f06e", "M569.354 231.631C512.969 135.949 407.81 72 288 72 168.14 72 63.004 135.994 6.646 231.631a47.999 47.999 0 0 0 0 48.739C63.031 376.051 168.19 440 288 440c119.86 0 224.996-63.994 281.354-159.631a47.997 47.997 0 0 0 0-48.738zM288 392c-75.162 0-136-60.827-136-136 0-75.162 60.826-136 136-136 75.162 0 136 60.826 136 136 0 75.162-60.826 136-136 136zm104-136c0 57.438-46.562 104-104 104s-104-46.562-104-104c0-17.708 4.431-34.379 12.236-48.973l-.001.032c0 23.651 19.173 42.823 42.824 42.823s42.824-19.173 42.824-42.823c0-23.651-19.173-42.824-42.824-42.824l-.032.001C253.621 156.431 270.292 152 288 152c57.438 0 104 46.562 104 104z"] };
+
+/***/ }),
+
 /***/ "./node_modules/@fortawesome/fontawesome-free-solid/faStar.js":
 /*!********************************************************************!*\
   !*** ./node_modules/@fortawesome/fontawesome-free-solid/faStar.js ***!
@@ -127,6 +149,17 @@ module.exports = { prefix: 'fas', iconName: 'check', icon: [512, 512, [], "f00c"
 /***/ (function(module, exports) {
 
 module.exports = { prefix: 'fas', iconName: 'star', icon: [576, 512, [], "f005", "M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"] };
+
+/***/ }),
+
+/***/ "./node_modules/@fortawesome/fontawesome-free-solid/faTrashAlt.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@fortawesome/fontawesome-free-solid/faTrashAlt.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = { prefix: 'fas', iconName: 'trash-alt', icon: [448, 512, [], "f2ed", "M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"] };
 
 /***/ }),
 
@@ -3863,7 +3896,7 @@ __webpack_require__.r(__webpack_exports__);
           timeout: 3000
         });
 
-        _this3.task_list.push(res.data.task);
+        _this3.task_list.push(res.data.task, 0);
       }); //    console.log(this.title);
     }
   },
@@ -3891,8 +3924,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['task']
+  props: ['task'],
+  methods: {
+    show: function show() {
+      this.$emit('Show', this.task.id);
+      console.log(this.task.id);
+    },
+    edit: function edit() {
+      this.$emit("Edit", this.task.id);
+      console.log(this.task.id);
+    },
+    remove: function remove() {
+      this.$emit('Delete');
+    }
+  }
 });
 
 /***/ }),
@@ -40790,7 +40840,19 @@ var render = function() {
     _vm._v(" "),
     _c("th", [_vm._v(" " + _vm._s(_vm.task.priority) + " ")]),
     _vm._v(" "),
-    _c("th", [_vm._v(" Edit | Remove ")])
+    _c("th", [
+      _c("button", { on: { click: _vm.show } }, [
+        _c("i", { staticClass: "fas fa-eye" })
+      ]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.edit } }, [
+        _c("i", { staticClass: "fas fa-edit " })
+      ]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.remove } }, [
+        _c("i", { staticClass: "fas fa-trash-alt" })
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -54595,12 +54657,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_fontawesome_free_solid_faStar__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faStar__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _fortawesome_fontawesome_free_solid_faCheck__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/fontawesome-free-solid/faCheck */ "./node_modules/@fortawesome/fontawesome-free-solid/faCheck.js");
 /* harmony import */ var _fortawesome_fontawesome_free_solid_faCheck__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faCheck__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faEdit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/fontawesome-free-solid/faEdit */ "./node_modules/@fortawesome/fontawesome-free-solid/faEdit.js");
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faEdit__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faEdit__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faTrashAlt__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/fontawesome-free-solid/faTrashAlt */ "./node_modules/@fortawesome/fontawesome-free-solid/faTrashAlt.js");
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faTrashAlt__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faTrashAlt__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faEye__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/fontawesome-free-solid/faEye */ "./node_modules/@fortawesome/fontawesome-free-solid/faEye.js");
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faEye__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faEye__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
 
 
-_fortawesome_fontawesome__WEBPACK_IMPORTED_MODULE_0__["default"].library.add([_fortawesome_fontawesome_free_solid_faCaretUp__WEBPACK_IMPORTED_MODULE_1___default.a, _fortawesome_fontawesome_free_solid_faCaretDown__WEBPACK_IMPORTED_MODULE_2___default.a, _fortawesome_fontawesome_free_solid_faStar__WEBPACK_IMPORTED_MODULE_3___default.a, _fortawesome_fontawesome_free_solid_faCheck__WEBPACK_IMPORTED_MODULE_4___default.a]);
+
+
+
+_fortawesome_fontawesome__WEBPACK_IMPORTED_MODULE_0__["default"].library.add([_fortawesome_fontawesome_free_solid_faCaretUp__WEBPACK_IMPORTED_MODULE_1___default.a, _fortawesome_fontawesome_free_solid_faCaretDown__WEBPACK_IMPORTED_MODULE_2___default.a, _fortawesome_fontawesome_free_solid_faStar__WEBPACK_IMPORTED_MODULE_3___default.a, _fortawesome_fontawesome_free_solid_faCheck__WEBPACK_IMPORTED_MODULE_4___default.a, _fortawesome_fontawesome_free_solid_faEdit__WEBPACK_IMPORTED_MODULE_5___default.a, _fortawesome_fontawesome_free_solid_faTrashAlt__WEBPACK_IMPORTED_MODULE_6___default.a, _fortawesome_fontawesome_free_solid_faEye__WEBPACK_IMPORTED_MODULE_7___default.a]);
 
 /***/ }),
 

@@ -61,7 +61,7 @@ class TaskController extends Controller
         if($request->expectsJson()){
             return response()->json([
                 'message' => 'You have successfully created task',
-                'task' => $task->jsonSerialize()
+                'task' => $task
             ]);
         }
         return back();
