@@ -17,17 +17,11 @@ class TaskController extends Controller
     {
         \Log::info('Req=API/TaskController@index Called');
 
-        
-        // $tasks = response()->json($task::paginate(10));
-        // $tasks = json_encode($task->paginate(5));
-        
         if(request()->expectsJson()){
-            return json_encode($task::all());
+            return json_encode($task::paginate(5));
         }
-        // $tasks = null;
         $tasks = json_encode($task::all());
 
-        // return response()->json($task::paginate(10));
         return response()->view('tasks.index', compact('tasks'));
     }
 

@@ -13,7 +13,7 @@
             
             <tr class="text-center">
                 <td></td>
-                <td colspan="2"><button @click="loadData(nextUrl)" class="form-control btn btn-outline-secondary"> More data load... </button></td>
+                <td colspan="2"><button v-if="nextUrl" @click="loadData(nextUrl)" class="form-control btn btn-outline-secondary"> More data load... </button></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="text" v-model="title" class="form-control" placeholder="Write your title here.."></td>
@@ -51,24 +51,27 @@ export default {
     
    methods: {
        getTask(){
-           window.axios.get('/api/task_list')
+           window.axios.get('/api/tasks')
            .then(({data}) =>{
-               console.log(data);
-               data.data.forEach(task => {
+                console.log(data);
+                this.nextUrl = data.next_page_url;
+                data.data.forEach(task => {
                    this.task_list.push(task)
                   
-               });
-                this.nextUrl = data.data.next_page_url;
-            //    console.log(data);
+                });
            });
        },
 
+
        loadData(nextUrl){
-           window.axios.get("/api/task_list?page=1")
+           window.axios.get(this.nextUrl)
            .then(({data}) =>{
+               this.nextUrl = data.next_page_url;
                console.log(data);
-                this.task_list.push(...data.data.task)
-                this.nextUrl = data.data.next_page_url;
+               data.data.forEach(task =>{
+                   this.task_list.push(task);
+               })
+                // this.task_list.push(...data.data.task)
             //    console.log(data);
            });
        },

@@ -3780,18 +3780,6 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Task_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Task.vue */ "./resources/js/API/Task.vue");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 //
 //
 //
@@ -3842,27 +3830,26 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     getTask: function getTask() {
       var _this = this;
 
-      window.axios.get('/api/task_list').then(function (_ref) {
+      window.axios.get('/api/tasks').then(function (_ref) {
         var data = _ref.data;
         console.log(data);
+        _this.nextUrl = data.next_page_url;
         data.data.forEach(function (task) {
           _this.task_list.push(task);
         });
-        _this.nextUrl = data.data.next_page_url; //    console.log(data);
       });
     },
     loadData: function loadData(nextUrl) {
       var _this2 = this;
 
-      window.axios.get("/api/task_list?page=1").then(function (_ref2) {
-        var _this2$task_list;
-
+      window.axios.get(this.nextUrl).then(function (_ref2) {
         var data = _ref2.data;
+        _this2.nextUrl = data.next_page_url;
         console.log(data);
-
-        (_this2$task_list = _this2.task_list).push.apply(_this2$task_list, _toConsumableArray(data.data.task));
-
-        _this2.nextUrl = data.data.next_page_url; //    console.log(data);
+        data.data.forEach(function (task) {
+          _this2.task_list.push(task);
+        }); // this.task_list.push(...data.data.task)
+        //    console.log(data);
       });
     },
     store: function store() {
@@ -40647,18 +40634,20 @@ var render = function() {
           _c("td"),
           _vm._v(" "),
           _c("td", { attrs: { colspan: "2" } }, [
-            _c(
-              "button",
-              {
-                staticClass: "form-control btn btn-outline-secondary",
-                on: {
-                  click: function($event) {
-                    return _vm.loadData(_vm.nextUrl)
-                  }
-                }
-              },
-              [_vm._v(" More data load... ")]
-            )
+            _vm.nextUrl
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "form-control btn btn-outline-secondary",
+                    on: {
+                      click: function($event) {
+                        return _vm.loadData(_vm.nextUrl)
+                      }
+                    }
+                  },
+                  [_vm._v(" More data load... ")]
+                )
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
