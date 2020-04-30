@@ -3866,7 +3866,6 @@ __webpack_require__.r(__webpack_exports__);
 
       window.axios.get('/api/tasks').then(function (_ref) {
         var data = _ref.data;
-        // console.log(data);
         _this.nextUrl = data.next_page_url;
         data.data.forEach(function (task) {
           _this.task_list.push(task);
@@ -3886,6 +3885,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     store: function store() {
       var _this3 = this;
+
+      if (this.checkEmptyTask) {
+        this.$toast.warning("Please input the task title", "warning");
+        return;
+      }
 
       axios.post("/api/tasks", this.task).then(function (res) {
         _this3.$toast.success(res.data.message, 'success', {
@@ -3917,6 +3921,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.getTask();
+  },
+  computed: {
+    checkEmptyTask: function checkEmptyTask() {
+      return !this.task.title || !this.task.priority;
+    }
   }
 });
 
@@ -3951,7 +3960,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.task.id);
     },
     edit: function edit() {
-      this.$emit("Edit", this.task.id);
+      this.$emit("edit", this.task.id);
       console.log(this.task.id);
     },
     remove: function remove() {
@@ -40706,7 +40715,7 @@ var render = function() {
           return _c("task-component", {
             key: task.id,
             attrs: { task: task },
-            on: { delete: _vm.remove }
+            on: { delete: _vm.remove, edit: _vm.updated }
           })
         }),
         _vm._v(" "),

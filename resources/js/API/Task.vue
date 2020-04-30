@@ -21,7 +21,7 @@ export default {
             console.log(this.task.id);
         },
         edit(){
-            this.$emit("Edit", this.task.id);
+            this.$emit("edit", this.task.id);
             console.log(this.task.id);
         },
         remove(){

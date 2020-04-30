@@ -8,7 +8,7 @@
         </thead>
         <tbody>
 
-            <task-component v-for="task in task_list" :key="task.id" :task="task" @delete="remove"></task-component>
+            <task-component v-for="task in task_list" :key="task.id" :task="task" @delete="remove" @edit="updated"></task-component>
             
             <tr class="text-center">
                 <td></td>
@@ -51,7 +51,6 @@ export default {
        getTask(){
            window.axios.get('/api/tasks')
            .then(({data}) =>{
-                // console.log(data);
                 this.nextUrl = data.next_page_url;
                 data.data.forEach(task => {
                    this.task_list.push(task)
@@ -72,6 +71,10 @@ export default {
        },
 
        store(){
+           if(this.checkEmptyTask){
+               this.$toast.warning("Please input the task title", "warning");
+               return;
+           }
            axios.post(`/api/tasks`, this.task)
            .then(res=>{
                this.$toast.success(res.data.message, 'success', {timeout:3000});
@@ -98,6 +101,11 @@ export default {
    },
    created(){
         this.getTask();
+    },
+    computed: {
+        checkEmptyTask(){
+            return !this.task.title || !this.task.priority;
+        }
     }
     
 }
