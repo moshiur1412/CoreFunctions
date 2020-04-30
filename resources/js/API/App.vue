@@ -8,7 +8,7 @@
         </thead>
         <tbody>
 
-            <task-component v-for="task in task_list" :key="task.id" :task="task"></task-component>
+            <task-component v-for="task in task_list" :key="task.id" :task="task" @delete="remove"></task-component>
             
             <tr class="text-center">
                 <td></td>
@@ -65,7 +65,6 @@ export default {
            window.axios.get(this.nextUrl)
            .then(({data}) =>{
                this.nextUrl = data.next_page_url;
-            //    console.log(data);
                data.data.forEach(task =>{
                    this.task_list.push(task);
                })
@@ -75,11 +74,24 @@ export default {
        store(){
            axios.post(`/api/tasks`, this.task)
            .then(res=>{
-               console.log(res);
                this.$toast.success(res.data.message, 'success', {timeout:3000});
-               this.task_list.push(res.data.task,0)
+               this.task_list.push(res.data.task);
+               this.task = '';
            });
-        //    console.log(this.title);
+        
+       },
+       remove(id){
+            window.axios.delete(`/api/tasks/${id}`)
+            .catch(err=>{
+                console.log(err.response);
+                this.$toast.error(err.response.status  + "\t"+ err.response.statusText, "Error");
+            })
+            .then(res=>{
+                this.$toast.success(res.data.message, "Success");
+                let index = this.task_list.findIndex(task=> task.id === id);
+                this.task_list.splice(index, 1);
+
+            });
        }
               
            

@@ -3878,8 +3878,7 @@ __webpack_require__.r(__webpack_exports__);
 
       window.axios.get(this.nextUrl).then(function (_ref2) {
         var data = _ref2.data;
-        _this2.nextUrl = data.next_page_url; //    console.log(data);
-
+        _this2.nextUrl = data.next_page_url;
         data.data.forEach(function (task) {
           _this2.task_list.push(task);
         });
@@ -3889,14 +3888,31 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios.post("/api/tasks", this.task).then(function (res) {
-        console.log(res);
-
         _this3.$toast.success(res.data.message, 'success', {
           timeout: 3000
         });
 
-        _this3.task_list.push(res.data.task, 0);
-      }); //    console.log(this.title);
+        _this3.task_list.push(res.data.task);
+
+        _this3.task = '';
+      });
+    },
+    remove: function remove(id) {
+      var _this4 = this;
+
+      window.axios["delete"]("/api/tasks/".concat(id))["catch"](function (err) {
+        console.log(err.response);
+
+        _this4.$toast.error(err.response.status + "\t" + err.response.statusText, "Error");
+      }).then(function (res) {
+        _this4.$toast.success(res.data.message, "Success");
+
+        var index = _this4.task_list.findIndex(function (task) {
+          return task.id === id;
+        });
+
+        _this4.task_list.splice(index, 1);
+      });
     }
   },
   created: function created() {
@@ -3939,18 +3955,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.task.id);
     },
     remove: function remove() {
-      var _this = this;
-
-      // this.$emit('Delete');
-      window.axios["delete"]("api/tasks/".concat(this.task.id))["catch"](function (err) {
-        console.log(err.response);
-
-        _this.$toast.error(err.response.status + "\t" + err.response.statusText, "Error");
-      }).then(function (res) {
-        console.log(res);
-
-        _this.$toast.success(res.data.message, "Success");
-      });
+      this.$emit('delete', this.task.id);
     }
   }
 });
@@ -40698,7 +40703,11 @@ var render = function() {
       "tbody",
       [
         _vm._l(_vm.task_list, function(task) {
-          return _c("task-component", { key: task.id, attrs: { task: task } })
+          return _c("task-component", {
+            key: task.id,
+            attrs: { task: task },
+            on: { delete: _vm.remove }
+          })
         }),
         _vm._v(" "),
         _c("tr", { staticClass: "text-center" }, [
