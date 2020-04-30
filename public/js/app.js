@@ -3779,7 +3779,22 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Task__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Task */ "./resources/js/API/Task.vue");
+/* harmony import */ var _Task_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Task.vue */ "./resources/js/API/Task.vue");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
 //
 //
 //
@@ -3812,14 +3827,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  // props: ['tasks'],
   components: {
-    TaskComponent: _Task__WEBPACK_IMPORTED_MODULE_0__["default"]
+    TaskComponent: _Task_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      // task_list: this.tasks.data,
-      task_list: []
+      task_list: [],
+      nextUrl: null,
+      title: '',
+      priority: ''
     };
   },
   methods: {
@@ -3831,10 +3847,27 @@ __webpack_require__.r(__webpack_exports__);
         console.log(data);
         data.data.forEach(function (task) {
           _this.task_list.push(task);
-        }); //    console.log(data);
+        });
+        _this.nextUrl = data.data.next_page_url; //    console.log(data);
       });
     },
-    loadData: function loadData(nextUrl) {}
+    loadData: function loadData(nextUrl) {
+      var _this2 = this;
+
+      window.axios.get("/api/task_list?page=1").then(function (_ref2) {
+        var _this2$task_list;
+
+        var data = _ref2.data;
+        console.log(data);
+
+        (_this2$task_list = _this2.task_list).push.apply(_this2$task_list, _toConsumableArray(data.data.task));
+
+        _this2.nextUrl = data.data.next_page_url; //    console.log(data);
+      });
+    },
+    store: function store() {
+      console.log(this.title);
+    }
   },
   created: function created() {
     this.getTask();
@@ -40629,7 +40662,82 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _c("tr", [
+          _c("td", { attrs: { colspan: "2" } }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.title,
+                  expression: "title"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Write your title here.." },
+              domProps: { value: _vm.title },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.title = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("td", [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.priority,
+                    expression: "priority"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "select" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.priority = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [_vm._v(" Low ")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "" } }, [_vm._v(" Medium ")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "" } }, [_vm._v(" High ")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("td", [
+            _c(
+              "button",
+              {
+                staticClass: " form-control btn btn-outline-primary",
+                on: { click: _vm.store }
+              },
+              [_vm._v(" Submit ")]
+            )
+          ])
+        ])
       ],
       2
     )
@@ -40648,42 +40756,6 @@ var staticRenderFns = [
       _c("th", { attrs: { scope: "col" } }, [_vm._v(" Priority ")]),
       _vm._v(" "),
       _c("th", { attrs: { scope: "col" } }, [_vm._v(" Actions ")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { attrs: { colspan: "2" } }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Write your title here.." }
-        })
-      ]),
-      _vm._v(" "),
-      _c("td", [
-        _c(
-          "select",
-          {
-            staticClass: "form-control",
-            attrs: { name: "priority", id: "select" }
-          },
-          [
-            _c("option", { attrs: { value: "" } }, [_vm._v(" Low ")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "" } }, [_vm._v(" Medium ")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "" } }, [_vm._v(" High ")])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("td", [
-        _c("button", { staticClass: " form-control btn btn-outline-primary" }, [
-          _vm._v(" Submit ")
-        ])
-      ])
     ])
   }
 ]
