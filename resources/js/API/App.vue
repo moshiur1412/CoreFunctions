@@ -60,7 +60,7 @@ export default {
     
    methods: {
        getTask(){
-           window.axios.get('/api/tasks')
+           axios.get('/api/tasks')
            .then(({data}) =>{
                 this.nextUrl = data.next_page_url;
                 data.data.forEach(task => {
@@ -97,7 +97,9 @@ export default {
         
        },
        update(id){
-           console.log(id);
+           let index = this.task_list.findIndex($editIndex=> task.id === id);
+            console.log(this.task_list.splice(index, 1));
+            // console.log(id);
 
        },
        remove(id){

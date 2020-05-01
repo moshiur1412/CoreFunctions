@@ -18,8 +18,10 @@ class TaskController extends Controller
         \Log::info('Req=API/TaskController@index Called');
 
         if(request()->expectsJson()){
+            
             return json_encode($task::orderBy('id','DESC')->paginate(5));
         }
+        
         $tasks = json_encode($task::all());
 
         return response()->view('tasks.index', compact('tasks'));
