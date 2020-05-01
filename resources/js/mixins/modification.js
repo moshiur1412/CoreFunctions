@@ -17,7 +17,7 @@ export default {
         update(){
             axios.put(this.endpoint, this.payload())
             .catch(({err})=>{
-                this.$toast.error(err.data.message, "Error", { timeout:3000 });
+                this.$toast.error("Opss! Something went wrong.", "Error", { timeout:3000 });
             })
             .then(({data})=>{
                 this.bodyHtml = data.body_html;

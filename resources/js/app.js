@@ -33,7 +33,6 @@ Vue.use(Authorization);
 Vue.component('question-page', require('./pages/QuestionPage.vue').default);
 Vue.component('app-component', require('./API/App.vue').default);
 
-// import TaskComponent from './components/Task.vue';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
