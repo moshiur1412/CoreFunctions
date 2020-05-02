@@ -17,10 +17,10 @@ class User extends JsonResource
         // return parent::toArray($request);
 
         return [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'created_at' => $request->created_at
+            'name' => $this->name,
+            'email' => $this->email,
+            // 'password' => $this->password,
+            'created_at' => $this->created_at
         ];
     }
 }
