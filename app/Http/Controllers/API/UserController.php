@@ -26,7 +26,7 @@ class UserController extends Controller
 
       
         return (new UserResource($request->user()))->additional([
-            'meta' =>[
+            'meta' => [
                 'token' => $token
 
             ]
