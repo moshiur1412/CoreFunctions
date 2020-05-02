@@ -13,13 +13,24 @@ class UserController extends Controller
         
         \Log::info('Req=API\UserController@register Called');
       
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
         
-        return new UserResource(User::all());
+
+        if(!$token = auth()->attempt($request->only(['email', 'password']))){
+            return abort(401);
+        }
+
+      
+        return (new UserResource($request->user()))->additional([
+            'meta' =>[
+                'token' => $token
+
+            ]
+        ]);
         // return response()->json(User::all());
     }
 
