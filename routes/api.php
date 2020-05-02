@@ -26,3 +26,4 @@ Route::get('task_list','API\TaskController@taskList');
 Route::post('users', 'API\UserController@register');
 Route::post('login', 'API\UserController@login');
 Route::get('user', 'API\UserController@user');
+Route::post('logout', 'API\UserController@logout');

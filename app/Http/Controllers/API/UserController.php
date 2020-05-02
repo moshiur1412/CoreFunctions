@@ -54,8 +54,18 @@ class UserController extends Controller
     }
 
     public function user(Request $request){
+
+        \Log::info('Req=API\UserController@user Called');
+
         return new UserResource($request->user());
     }
+
+    public function logout(){
+
+        auth()->logout();
+    }
+
+
    
 
 }
