@@ -23,4 +23,6 @@ Route::resource('questions', 'QuestionController');
 Route::resource('tasks', 'API\TaskController');
 Route::get('task_list','API\TaskController@taskList');
 
-Route::post('/users', 'API\UserController@register');
+Route::post('users', 'API\UserController@register');
+Route::post('login', 'API\UserController@login');
+Route::get('user', 'API\UserController@user');

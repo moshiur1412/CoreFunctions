@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Http\Requests\StoreUser;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\User as UserResource;
 
@@ -19,21 +20,40 @@ class UserController extends Controller
             'password' => bcrypt($request->password)
         ]);
         
-
         if(!$token = auth()->attempt($request->only(['email', 'password']))){
             return abort(401);
         }
 
-      
         return (new UserResource($request->user()))->additional([
             'meta' => [
                 'token' => $token
 
             ]
         ]);
-        // return response()->json(User::all());
+       
     }
 
+
+    public function login(LoginRequest $request){
+        
+        \Log::info('Req=API\UserController@login Called');
+
+        if(!$token = Auth()->attempt($request->only(['email', 'password']))){
+            return response()->json([
+                'errors' => [
+                    'email' => 'Sorry, we can\'t find you on details'
+                ]
+                ], 422);
+        }
+
+        return (new UserResource($request->user()))->additional([
+            'meta' => [
+                'token' => $token
+            ]
+        ]);
+    }
+
+    
    
 
 }
