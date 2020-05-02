@@ -11,6 +11,7 @@
         "php": "^7.2",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
+        "fzaninotto/faker": "^1.4",
         "illuminate/routing": "^5.5|^6",
         "illuminate/session": "^5.5|^6",
         "illuminate/support": "^5.5|^6",
@@ -21,8 +22,8 @@
         "mews/purifier": "^3.2",
         "parsedown/laravel": "^1.2",
         "symfony/debug": "^3|^4",
-        "fzaninotto/faker": "^1.4",
-        "symfony/finder": "^3|^4"
+        "symfony/finder": "^3|^4",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
