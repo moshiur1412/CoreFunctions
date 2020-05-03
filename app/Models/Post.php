@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Topic;
-use App\Http\Models\Traits\Orderable;
+
+use App\Models\Traits\Orderable;
 
 class Post extends Model
 {

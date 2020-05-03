@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Models\Traits;
+namespace App\Models\Traits;
 
-trait Ordertable{
+trait Orderable {
 
     public function scopeLatestFirst($query){
     

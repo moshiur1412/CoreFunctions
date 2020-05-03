@@ -29,4 +29,11 @@ Route::post('logout', 'API\UserController@logout');
 
 Route::group(['middleware' => ['jwt.verity']], function(){
     Route::get('user', 'API\UserController@user');
+    Route::post('topics', 'API\TopicController@store');
+
 });
+
+// Route::group(['prefix' => 'topics'], function(){
+//     Route::post('/', 'API\TopicController@store')->middleware('auth:api');
+
+// });
