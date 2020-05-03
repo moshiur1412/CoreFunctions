@@ -9,23 +9,33 @@ use Illuminate\Http\Request;
 use App\Http\Resources\User as UserResource;
 
 use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller 
 {
+    
     public function register(StoreUser $request){
         
-        \Log::info('Req=API\UserController@register Called');
+        \Log::info('Req=API/UserController@register Called');
       
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
         
-        if(!$token = auth()->attempt($request->only(['email', 'password']))){
-            return abort(401);
-        }
+        $credentials = $request->only(['email', 'password']);
+        
+        try{
+            if(!$token = Auth()->attempt($credentials)){
+                return response()->json(['error' => 'invalid credentials'], 400);
+            }
 
+        } catch(JWTException $e){
+            return response()->json(['error' => 'could not create token'], 500);
+
+        }
+        
         return (new UserResource($request->user()))->additional([
             'meta' => [
                 'token' => $token
@@ -38,9 +48,11 @@ class UserController extends Controller
 
     public function login(LoginRequest $request){
         
-        \Log::info('Req=API\UserController@login Called');
+        \Log::info('Req=API/UserController@login Called');
 
-        if(!$token = Auth()->attempt($request->only(['email', 'password']))){
+        $credentials = $request->only('email', 'password');
+
+        if(!$token = Auth()->attempt($credentials)){
             return response()->json([
                 'errors' => [
                     'email' => 'Sorry, we can\'t find you on details'
@@ -57,7 +69,7 @@ class UserController extends Controller
 
     public function user(Request $request){
 
-        \Log::info('Req=API\UserController@user Called');
+        \Log::info('Req=API/UserController@user Called');
 
         try {
 
@@ -79,9 +91,10 @@ class UserController extends Controller
 
             }
 
-        return response()->json(compact('user'));
+        return new UserResource($request->user());
     }
 
+    
     public function logout(){
 
         auth()->logout();
