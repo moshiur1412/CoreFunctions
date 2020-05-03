@@ -8,6 +8,8 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\User as UserResource;
 
+use JWTAuth;
+
 class UserController extends Controller 
 {
     public function register(StoreUser $request){
@@ -57,13 +59,34 @@ class UserController extends Controller
 
         \Log::info('Req=API\UserController@user Called');
 
-        return new UserResource($request->user());
+        try {
+
+                if (! $user = JWTAuth::parseToken()->authenticate()) {
+                        return response()->json(['user_not_found'], 404);
+                }
+
+            } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+
+                    return response()->json(['token_expired'], $e->getStatusCode());
+
+            } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+
+                    return response()->json(['token_invalid'], $e->getStatusCode());
+
+            } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+
+                    return response()->json(['token_absent'], $e->getStatusCode());
+
+            }
+
+        return response()->json(compact('user'));
     }
 
     public function logout(){
 
         auth()->logout();
     }
+
 
 
    

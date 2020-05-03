@@ -23,7 +23,7 @@
         "parsedown/laravel": "^1.2",
         "symfony/debug": "^3|^4",
         "symfony/finder": "^3|^4",
-        "tymon/jwt-auth": "^1.0"
+        "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

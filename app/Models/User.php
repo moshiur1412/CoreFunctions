@@ -22,7 +22,9 @@ class User extends Authenticatable implements JWTSubject
         'name', 'email', 'password',
     ];
 
-    protected $appends = ['url', 'gravatar'];
+    // protected $guarded = [];
+
+    // protected $appends = ['url', 'gravatar'];
 
     /**
      * The attributes that should be hidden for arrays.
