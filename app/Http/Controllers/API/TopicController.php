@@ -1,18 +1,23 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use App\Http\Resources\Topic as TopicResource;
 use App\Http\Controllers\Controller;
-
-// use Illuminate\Http\Request;
 use App\Http\Requests\StorePost;
 use App\Models\Topic;
 use App\Models\Post;
 
-use App\Http\Resources\Topic as TopicResource;
-
 class TopicController extends Controller
-{
+{    
+    public function index(){
+
+        \Log::info("Req=API\TopicController@index called");
+        
+        $topics = Topic::latestFirst()->get();
+
+        return TopicResource::collection($topics);
+    }
+
     public function store(StorePost $storePost, Topic $topic, Post $post){
 
         \Log::info("Req=API\TopicController@store called");
