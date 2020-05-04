@@ -11,7 +11,7 @@ class TopicController extends Controller
 {    
     public function index(){
 
-        \Log::info("Req=API\TopicController@index called");
+        \Log::info("Req=API/TopicController@index called");
         
         $topics = Topic::latestFirst()->simplePaginate(3);
 
@@ -20,7 +20,7 @@ class TopicController extends Controller
 
     public function store(StorePost $storePost, Topic $topic, Post $post){
 
-        \Log::info("Req=API\TopicController@store called");
+        \Log::info("Req=API/TopicController@store called");
 
         $topic->title = $storePost->title;
         $topic->user()->associate($storePost->user());
@@ -37,7 +37,19 @@ class TopicController extends Controller
 
     public function show(Topic $topic){
         
-        \Log::info("Req=API\TopicController@show called");
+        \Log::info("Req=API/TopicController@show called");
+
+        return new TopicResource($topic);
+    }
+
+    public function update(StorePost $storePost, Topic $topic){
+        
+        \Log::info("Req=API/TopicController@update called");
+
+        $topic->title = $storePost->get('title', $topic->title);
+        // $topic->body = $storePost->get('body', $topic->body);
+
+        $topic->save();
 
         return new TopicResource($topic);
     }

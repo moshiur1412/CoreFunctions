@@ -32,6 +32,7 @@ Route::group(['middleware' => ['jwt.verity']], function(){
     Route::post('topics', 'API\TopicController@store');
     Route::get('topics', 'API\TopicController@index');
     Route::get('topics/{topic}', 'API\TopicController@show');
+    Route::patch('topics/{topic}', 'API\TopicController@update');
 
 });
 

@@ -23,16 +23,29 @@ class StorePost extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => 'required|max:255|min:5',
-            'body' => 'required|max:2000|min:5'
-
-        ];
+        // dd($this->method());
+        switch($this->method()){
+            case 'POST':
+                {
+                    return [
+                        'title' => 'required|max:255|min:5',
+                        'body' => 'required|max:2000|min:5'
+                    ];
+                }
+            case 'PATCH':
+                {
+                    return [
+                        'title' => 'required|max:255'
+                    ];
+                }
+            default:break;
+        }
+       
     }
 
 
     public function withValidator(){
-        
+
         \Log::info('Req=API/StorePost@withValidator Called');
     }
 }
