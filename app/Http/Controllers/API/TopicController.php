@@ -13,7 +13,7 @@ class TopicController extends Controller
 
         \Log::info("Req=API\TopicController@index called");
         
-        $topics = Topic::latestFirst()->get();
+        $topics = Topic::latestFirst()->simplePaginate(3);
 
         return TopicResource::collection($topics);
     }
@@ -33,5 +33,12 @@ class TopicController extends Controller
 
         return new TopicResource($topic);
 
+    }
+
+    public function show(Topic $topic){
+        
+        \Log::info("Req=API\TopicController@show called");
+
+        return new TopicResource($topic);
     }
 }
