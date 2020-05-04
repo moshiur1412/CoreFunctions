@@ -35,6 +35,9 @@ Route::group(['middleware' => ['jwt.verity']], function(){
     Route::patch('topics/{topic}', 'API\TopicController@update');
     Route::delete('topics/{topic}', 'API\TopicController@destroy');
 
+    Route::post('{topic}/posts', 'API\PostController@store');
+
+
 });
 
 // Route::group(['prefix' => 'topics'], function(){
