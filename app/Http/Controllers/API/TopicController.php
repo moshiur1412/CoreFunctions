@@ -55,4 +55,15 @@ class TopicController extends Controller
 
         return new TopicResource($topic);
     }
+
+    public function destroy(Topic $topic){
+
+        \Log::info("Req=API/TopicController@destroy called");
+
+        $this->authorize('destroy', $topic);
+        
+        $topic->delete();
+
+        return  response(null, 204);
+    }
 }
