@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 use App\Http\Resources\Topic as TopicResource;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePost;
+use App\Http\Requests\StoreTopic;
 use App\Models\Topic;
 use App\Models\Post;
 
@@ -18,15 +18,15 @@ class TopicController extends Controller
         return TopicResource::collection($topics);
     }
 
-    public function store(StorePost $storePost, Topic $topic, Post $post){
+    public function store(StoreTopic $request, Topic $topic, Post $post){
 
         \Log::info("Req=API/TopicController@store called");
 
-        $topic->title = $storePost->title;
-        $topic->user()->associate($storePost->user());
+        $topic->title = $request->title;
+        $topic->user()->associate($request->user());
 
-        $post->body = $storePost->body;
-        $post->user()->associate($storePost->user());
+        $post->body = $request->body;
+        $post->user()->associate($request->user());
 
         $topic->save();
         $topic->posts()->save($post);
@@ -42,12 +42,14 @@ class TopicController extends Controller
         return new TopicResource($topic);
     }
 
-    public function update(StorePost $storePost, Topic $topic){
+    public function update(StoreTopic $request, Topic $topic){
         
         \Log::info("Req=API/TopicController@update called");
 
-        $topic->title = $storePost->get('title', $topic->title);
-        // $topic->body = $storePost->get('body', $topic->body);
+        $this->authorize('update', $topic);
+
+        $topic->title = $request->get('title', $topic->title);
+        // $topic->body = $request->get('body', $topic->body);
 
         $topic->save();
 
