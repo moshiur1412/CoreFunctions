@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 use App\Http\Resources\Topic as TopicResource;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTopic;
+use App\Http\Requests\StoreTopicRequest;
 use App\Models\Topic;
 use App\Models\Post;
 
@@ -18,7 +18,7 @@ class TopicController extends Controller
         return TopicResource::collection($topics);
     }
 
-    public function store(StoreTopic $request, Topic $topic, Post $post){
+    public function store(StoreTopicRequest $request, Topic $topic, Post $post){
 
         \Log::info("Req=API/TopicController@store called");
 
@@ -42,14 +42,14 @@ class TopicController extends Controller
         return new TopicResource($topic);
     }
 
-    public function update(StoreTopic $request, Topic $topic){
+    public function update(StoreTopicRequest $request, Topic $topic){
         
         \Log::info("Req=API/TopicController@update called");
 
         $this->authorize('update', $topic);
 
-        $topic->title = $request->get('title', $topic->title);
-        // $topic->body = $request->get('body', $topic->body);
+        // $topic->title = $request->get('title', $topic->title);
+        $topic->title = $request->title;
 
         $topic->save();
 

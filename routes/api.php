@@ -39,7 +39,7 @@ Route::group(['middleware' => ['jwt.verity']], function(){
         Route::patch('/{topic}', 'API\TopicController@update');
         Route::delete('/{topic}', 'API\TopicController@destroy');
     
-        Route::get('/post', 'API\PostController@index');
+        Route::get('/{topic}/posts', 'API\PostController@index');
         Route::post('/{topic}/posts', 'API\PostController@store');
         Route::get('/{topic}/posts/{posts}', 'API\PostController@show');
         Route::patch('/{topic}/posts/{post}', 'API\PostController@update');
@@ -50,8 +50,3 @@ Route::group(['middleware' => ['jwt.verity']], function(){
 
 
 });
-
-// Route::group(['prefix' => 'topics'], function(){
-//     Route::post('/', 'API\TopicController@store')->middleware('auth:api');
-
-// });

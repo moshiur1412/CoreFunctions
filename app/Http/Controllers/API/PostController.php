@@ -11,6 +11,17 @@ use App\Models\Topic;
 
 class PostController extends Controller
 {
+    
+    
+    public function index(Request $request, Post $post){
+        
+        \Log::info("Req=API/PostController@index Called");
+       
+        $posts = $post::where('topic_id', $request->topic)->get();
+
+        return PostResource::collection($posts);
+    }
+
     public function store(StorePostRequest $request, Post $post, Topic $topic){
 
         \Log::info("Req=API/PostController@store called");
