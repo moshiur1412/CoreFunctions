@@ -27,4 +27,8 @@ class StorePostRequest extends FormRequest
             'body' => 'required|max:200|min:10'
         ];
     }
+
+    public function withValidator(){
+        \Log::info("Req=StorePostRequest@withValidator Called");
+    }
 }

@@ -41,7 +41,7 @@ Route::group(['middleware' => ['jwt.verity']], function(){
     
         Route::get('/{topic}/posts', 'API\PostController@index');
         Route::post('/{topic}/posts', 'API\PostController@store');
-        Route::get('/{topic}/posts/{posts}', 'API\PostController@show');
+        Route::get('/{topic}/posts/{post}', 'API\PostController@show');
         Route::patch('/{topic}/posts/{post}', 'API\PostController@update');
         Route::delete('/{topic}/posts/{post}', 'API\PostController@destroy');
 

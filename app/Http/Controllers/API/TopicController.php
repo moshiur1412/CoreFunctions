@@ -48,8 +48,8 @@ class TopicController extends Controller
 
         $this->authorize('update', $topic);
 
-        // $topic->title = $request->get('title', $topic->title);
-        $topic->title = $request->title;
+        $topic->title = $request->get('title', $topic->title);
+        // $topic->title = $request->title;
 
         $topic->save();
 

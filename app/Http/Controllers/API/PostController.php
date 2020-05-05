@@ -35,4 +35,28 @@ class PostController extends Controller
         return new PostResource($post);
 
     }
+
+    public function update(StorePostRequest $request, Post $post){
+        
+        \Log::info("Req=API/PostController@update called");
+
+        // dd($post);
+        $post->body = $request->get('body', $post->body);
+        
+        $post->user()->associate($request->user());
+        
+        $topic->posts()->save($post);
+
+        return PostResource::collection($post);
+        
+    }
+
+    public function show(Topic $topic, Post $post){
+        
+        \Log::info("Req=API/PostController@show Called");
+
+        // $post = $post->where('id', $request->post);
+
+        return new PostResource($post);
+    }
 }
