@@ -36,18 +36,19 @@ class PostController extends Controller
 
     }
 
-    public function update(StorePostRequest $request, Post $post){
+    public function update(StorePostRequest $request, Topic $topic, Post $post){
         
         \Log::info("Req=API/PostController@update called");
 
-        // dd($post);
         $post->body = $request->get('body', $post->body);
         
-        $post->user()->associate($request->user());
+        // $post->user()->associate($request->user());
         
-        $topic->posts()->save($post);
+        // $topic->posts()->save($post);
 
-        return PostResource::collection($post);
+        $post->save();
+
+        return new PostResource($post);
         
     }
 
@@ -58,5 +59,14 @@ class PostController extends Controller
         // $post = $post->where('id', $request->post);
 
         return new PostResource($post);
+    }
+
+    public function destroy(Topic $topic, Post $post){
+       
+        \Log::info("Req=API/PostController@destroy called");
+        
+        $post->delete();
+
+        return response('Done', 204);
     }
 }
