@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Topic;
+use APp\Models\Like;
 
 use App\Models\Traits\Orderable;
 
@@ -22,5 +23,10 @@ class Post extends Model
     public function topic(){
         // post->topic
         return $this->belongsTo(Topic::class);
+    }
+
+    public function like(){
+        // post->like
+        return $this->morphOne(Like::class, 'likeable');
     }
 }
