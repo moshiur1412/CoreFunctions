@@ -45,6 +45,9 @@ Route::group(['middleware' => ['jwt.verity']], function(){
         Route::patch('/{topic}/posts/{post}', 'API\PostController@update');
         Route::delete('/{topic}/posts/{post}', 'API\PostController@destroy');
 
+        Route::get('/{topic}/posts/{post}/like', 'API\LikePostController@index');
+        Route::post('/{topic}/posts/{post}/like', 'API\LikePostController@store');
+
     });
    
 

@@ -27,6 +27,6 @@ class Topic extends Model
 
     public function like(){
         // topic->like
-        return $this->morphOne(Like::class);
+        return $this->morphMany(Like::class);
     }
 }
