@@ -40,6 +40,8 @@ class PostController extends Controller
         
         \Log::info("Req=API/PostController@update called");
 
+        $this->authorize('update', $post);
+
         $post->body = $request->get('body', $post->body);
         
         // $post->user()->associate($request->user());
@@ -64,7 +66,9 @@ class PostController extends Controller
     public function destroy(Topic $topic, Post $post){
        
         \Log::info("Req=API/PostController@destroy called");
-        
+      
+        $this->authorize('delete', $post);
+
         $post->delete();
 
         return response('Done', 204);

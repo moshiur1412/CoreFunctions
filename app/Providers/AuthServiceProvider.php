@@ -10,6 +10,8 @@ use App\Models\Answer;
 use App\Policies\AnswerPolicy;
 use App\Models\Topic;
 use App\Policies\TopicPolicy;
+use App\Models\Post;
+use App\Policies\PostPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         Question::class => QuestionPolicy::class,
         Answer::class => AnswerPolicy::class,
         Topic::class => TopicPolicy::class,
+        Post::class => PostPolicy::class,
     ];
 
     /**
