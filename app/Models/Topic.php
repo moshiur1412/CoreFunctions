@@ -3,15 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-// use App\Models\User;
-// use App\Models\Post;
-// use App\Models\Like;
 
-use App\Models\Traits\Orderable;
+use App\Models\Traits\OrderableTrait;
 
 class Topic extends Model
 {
-    use Orderable;
+    use OrderableTrait;
 
     protected $guarded = [];
 

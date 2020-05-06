@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use App\Models\Traits\VotableTrait;
 
 class Question extends Model
 {

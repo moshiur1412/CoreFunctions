@@ -3,7 +3,6 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
-// use App\Models\User;
 
 class Like extends Model
 {

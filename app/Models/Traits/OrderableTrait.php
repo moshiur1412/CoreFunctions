@@ -2,7 +2,7 @@
 
 namespace App\Models\Traits;
 
-trait Orderable {
+trait OrderableTrait {
 
     public function scopeLatestFirst($query) {
 		return $query->orderBy('created_at', 'desc');

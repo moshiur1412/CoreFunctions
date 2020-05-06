@@ -5,10 +5,6 @@ namespace App\models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-// use App\Models\Question;
-// use App\Models\Topic;
-// use App\Models\Post;
-// use App\Models\Like;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -27,7 +23,7 @@ class User extends Authenticatable implements JWTSubject
 
     // protected $guarded = [];
 
-    // protected $appends = ['url', 'gravatar'];
+    protected $appends = ['url', 'gravatar'];
 
     /**
      * The attributes that should be hidden for arrays.
