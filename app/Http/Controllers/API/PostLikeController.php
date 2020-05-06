@@ -22,6 +22,10 @@ class PostLikeController extends Controller
 
         $this->authorize('like', $post);
 
+        if(request()->user()->hasLikedPost($post)){
+            return response(null, 409);
+        }
+
         $like->user()->associate(request()->user());
         
         $post->likes()->save($like);
