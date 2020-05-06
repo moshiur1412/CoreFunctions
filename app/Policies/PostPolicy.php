@@ -25,4 +25,12 @@ class PostPolicy
 
         return $user->id == $post->user_id;
     }
+
+    public function like(User $user, Post $post){
+        
+        \Log::info("Req=PostPolicy@like called");
+        // return $user->id != $post->user_id;
+        
+        return !$user->ownPost($post);
+    }
 }
