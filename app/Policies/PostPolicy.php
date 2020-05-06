@@ -15,7 +15,9 @@ class PostPolicy
         
         \Log::info("Req=PostPolicy@update called");
         
-        return $user->id === $post->user_id;
+        // return $user->id === $post->user_id;
+
+        return $user->ownsPost($post);
 
     }
 
@@ -23,14 +25,17 @@ class PostPolicy
         
         \Log::info("Req=PostPolicy@delete called");
 
-        return $user->id == $post->user_id;
+        // return $user->id == $post->user_id;
+
+        return $user->ownsPost($post);
     }
 
     public function like(User $user, Post $post){
         
         \Log::info("Req=PostPolicy@like called");
+        
         // return $user->id != $post->user_id;
         
-        return !$user->ownPost($post);
+        return !$user->ownsPost($post);
     }
 }

@@ -20,6 +20,8 @@ class PostLikeController extends Controller
 
         \Log::info("Req=Api/PostLikeController@store called");
 
+        $this->authorize('like', $post);
+
         $like->user()->associate(request()->user());
         
         $post->likes()->save($like);
