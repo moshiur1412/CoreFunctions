@@ -15,10 +15,18 @@
 // 	return view('layouts.app');
 // });
 
+Route::get('/queue-test', function(){
+	
+	$details['email'] = 'mdbcorporationbd@gmail.com';
+   
+	dispatch(new App\Jobs\SendEmailTest($details));
+	
+	return 'done';
+});
+
 Route::get('/', 'QuestionController@index');\
 
 Auth::routes();
-
 
 Route::prefix('admin')->group(function(){
 
@@ -51,3 +59,4 @@ Route::delete('questions/{question}/favorite', 'FavoriteQuestionController@distr
 Route::post('questions/{question}/vote', 'VoteQuestionController')->name('questions.vote');
 
 Route::post('answers/{answer}/vote', 'VoteAnswerController')->name('answers.vote');
+
