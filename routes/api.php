@@ -31,22 +31,28 @@ Route::group(['middleware' => ['jwt.verity']], function(){
     
     Route::get('user', 'API\UserController@user');
     
-    Route::group(['prefix' => 'topics'], function(){
+    Route::group(['prefix' => 'topics/'], function(){
 
-        Route::get('/', 'API\TopicController@index');
-        Route::post('/', 'API\TopicController@store');
-        Route::get('/{topic}', 'API\TopicController@show');
-        Route::patch('/{topic}', 'API\TopicController@update');
-        Route::delete('/{topic}', 'API\TopicController@destroy');
+        Route::get('', 'API\TopicController@index');
+        Route::post('', 'API\TopicController@store');
+        Route::get('{topic}', 'API\TopicController@show');
+        Route::patch('{topic}', 'API\TopicController@update');
+        Route::delete('{topic}', 'API\TopicController@destroy');
     
-        Route::get('/{topic}/posts', 'API\PostController@index');
-        Route::post('/{topic}/posts', 'API\PostController@store');
-        Route::get('/{topic}/posts/{post}', 'API\PostController@show');
-        Route::patch('/{topic}/posts/{post}', 'API\PostController@update');
-        Route::delete('/{topic}/posts/{post}', 'API\PostController@destroy');
+        Route::group(['prefix' => '{topic}/posts/'], function(){
+            Route::get('', 'API\PostController@index');
+            Route::post('', 'API\PostController@store');
+            Route::get('{post}', 'API\PostController@show');
+            Route::patch('{post}', 'API\PostController@update');
+            Route::delete('{post}', 'API\PostController@destroy');
 
-        Route::get('/like', 'API\LikePostController@index');
-        Route::post('/{topic}/posts/{post}/like', 'API\LikePostController@store');
+        });
+
+        Route::group(['prefix' => '{post}/likes/'], function(){
+            Route::get('', 'API\PostLikeController@index');
+            Route::post('', 'API\PostLikeController@store');
+
+        });
 
     });
    
