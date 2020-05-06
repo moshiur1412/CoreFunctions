@@ -5,9 +5,10 @@ namespace App\models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Question;
-use App\Models\Topic;
-use App\Models\Post;
+// use App\Models\Question;
+// use App\Models\Topic;
+// use App\Models\Post;
+// use App\Models\Like;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -141,5 +142,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Post::class);
     }
 
+    public function Likes(){
+        // user->Likes
+        return $this->hasMany(Like::class);
+    }
     
 }
