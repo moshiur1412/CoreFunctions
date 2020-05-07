@@ -17,14 +17,13 @@
 
 Route::get('/queue-test', 'QueueController@index');
 
-Route::get('problem', 'ProblemController@problem');
 
 Route::get('/', 'QuestionController@index');
 
 Auth::routes();
 
 Route::prefix('admin')->group(function(){
-
+	
 	Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
 	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 	Route::get('/dashboard', 'AdminController@index')->name('admin.home');
@@ -55,3 +54,4 @@ Route::post('questions/{question}/vote', 'VoteQuestionController')->name('questi
 
 Route::post('answers/{answer}/vote', 'VoteAnswerController')->name('answers.vote');
 
+Route::get('solutions/{id}', 'ProblemController@solutions');
