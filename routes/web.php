@@ -17,6 +17,8 @@
 
 Route::get('/queue-test', 'QueueController@index');
 
+Route::get('problem', 'ProblemController@problem');
+
 Route::get('/', 'QuestionController@index');
 
 Auth::routes();
