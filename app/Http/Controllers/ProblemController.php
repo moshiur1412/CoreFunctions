@@ -71,7 +71,7 @@ class ProblemController extends Controller
 
         $arrColValue = [
             ['id' => 1022, 'name' => 'Abir', 'gender' => 'F'],
-            ['id' => 2541, 'name' => 'fake', 'gender' => 'F'],
+            ['id' => 2541, 'name' => 'fake', 'gender' => 'M'],
             ['id' => 8596, 'name' => 'tuppa', 'gender' => 'F'],
             ['id' => 258, 'name' => 'nop', 'gender' => 'M'],
             ['id' => 585, 'name' => 'Bon', 'gender' => 'F']
@@ -83,12 +83,33 @@ class ProblemController extends Controller
       
         $fname=array("Peter","Ben","Joe");
         $age=array("35","37","43");
-        $array_combine = array_combine($fname, $age); // should be equal number elements
+        
+        $a=array("A","Cat","Dog","A","Dog");
+        // $array_combine = array_combine($fname, $age); // should be equal number elements
 
-        dd($array_combine);
+        $array_count_values = array_count_values($a); // return value->count();
+
+        $a4 = [ "a" => "red", "b" => "green", "c"=> "blue", "f" => "yellow", "h" => "white", "k" => "diff"];
+        $a5 = [ "a" => "red", "c" => "green", "b"=> "blue", "g" => "black", "i" => "white", "k" => "diff1" ];
+
+        // $array = array_diff($a4, $a5);                                // [yellow, diff] --> Searching value
+        // $array = array_diff_key($a4, $a5);                              // [yellow, white] --> Searching key
+        // $array = array_diff_uassoc($a4, $a5, 'self::diffFunction'); // [green, blue, yellow, white, diff] -->checked key+val
+        $array = array_diff_ukey($a4, $a5, 'self::diffFunction');  // [yellow, white] --> searching key
+        
+        dd($array);
     }
 
-    
+    public function diffFunction($a, $b){
+
+        if($a === $b){
+            return 0;
+        }
+
+        return ($a>$b) ? 1 : -1;
+    }
+
+
     public function solutions_3($id){
         
         $people = [
