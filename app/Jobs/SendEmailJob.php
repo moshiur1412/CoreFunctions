@@ -7,10 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Mail\SendEmailTest as sendMail;
+use App\Mail\SendEmailTest;
 use Mail;
 
-class SendEmailTest implements ShouldQueue
+class SendEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -32,7 +32,7 @@ class SendEmailTest implements ShouldQueue
      */
     public function handle()
     {
-        $email = new sendMail();
+        $email = new SendEmailTest();
 
         Mail::to($this->details['email'])->send($email);
     }

@@ -15,16 +15,9 @@
 // 	return view('layouts.app');
 // });
 
-Route::get('/queue-test', function(){
-	
-	$details['email'] = 'mdbcorporationbd@gmail.com';
-   
-	dispatch(new App\Jobs\SendEmailTest($details));
-	
-	return 'done';
-});
+Route::get('/queue-test', 'QueueController@index');
 
-Route::get('/', 'QuestionController@index');\
+Route::get('/', 'QuestionController@index');
 
 Auth::routes();
 
