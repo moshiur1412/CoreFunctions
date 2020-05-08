@@ -94,13 +94,40 @@ class ProblemController extends Controller
 
         // $array = array_diff($a4, $a5);                                // [yellow, diff] --> Searching value
         // $array = array_diff_key($a4, $a5);                              // [yellow, white] --> Searching key
-        // $array = array_diff_uassoc($a4, $a5, 'self::diffFunction'); // [green, blue, yellow, white, diff] -->checked key+val
-        $array = array_diff_ukey($a4, $a5, 'self::diffFunction');  // [yellow, white] --> searching key
+        // $array = array_diff_uassoc($a4, $a5, 'self::arrayFunction'); // [green, blue, yellow, white, diff] -->checked key+val
+        // $array = array_diff_ukey($a4, $a5, 'self::arrayFunction');  // [yellow, white] --> searching key
         
+        // $array = array_fill(2,5,"blue"); // index=2,Ele=5, val=blue 
+        // $array = array_fill(2,5,["blue", "Black"]); // index=2; Ele=5; val=[];
+        // $array = array_fill_keys(["a", "b", "c"], "blue"); // key[], value 
+        // $array = array_fill_keys(["a", "b", "c"], ["blue", "black"]); // Key[], val=[]
+        
+        // $array = array_filter([1,2,3,4], 'self::testOdd'); // 0=>1, 2=>3
+        // $array = array_filter([1,2,3,4], 'self::testOdd', ARRAY_FILTER_USE_KEY ); // 1=>2, 3=>4
+        // $array = array_filter([1,2,3,4], 'self::testOdd', ARRAY_FILTER_USE_BOTH ); // 0=>1, 2=>3
+        
+        // $array = array_flip($a4); // reverse [value=>key] red=>a, green=>b ...
+       
+        // $array = array_intersect($a4, $a5); // [red, green, blue, white]
+        
+        // $array = array_intersect($a4,$a5); // [red, green, blue, white]
+        // $array = array_intersect_assoc($a4, $a5); // [a=>red]
+        // $array = array_intersect_key($a4, $a5); // [red, green, blue, diff]
+        // $array = array_intersect_uassoc($a4, $a5, 'self::arrayFunction'); // [red]
+        // $array = array_intersect_ukey($a4, $a5, 'self::arrayFunction'); // [red, green, blue, diff]
+        
+        // $array = array_key_exists("red", $a4); // true/ false return
+        
+        // $array = array_keys($a4); // [key=>key]
+
         dd($array);
     }
 
-    public function diffFunction($a, $b){
+    public function testOdd($a){
+        return ($a & 1);
+    }
+
+    public function arrayFunction($a, $b){
 
         if($a === $b){
             return 0;
