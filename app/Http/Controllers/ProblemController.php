@@ -117,11 +117,85 @@ class ProblemController extends Controller
         // $array = array_intersect_ukey($a4, $a5, 'self::arrayFunction'); // [red, green, blue, diff]
         
         // $array = array_key_exists("red", $a4); // true/ false return
-        
+
         // $array = array_keys($a4); // [key=>key]
 
+        // $array= array_map('self::arrayMap',$a4, $a5); // checked Value-->
+
+        // $array= array_merge($a4, $a5);
+        # Results ---> 
+        // "a" => "red"
+        // "b" => "blue"
+        // "c" => "green"
+        // "f" => "yellow"
+        // "h" => "white"
+        // "k" => "diff1"
+        // "g" => "black"
+        // "i" => "white"
+       
+        // $array= array_merge_recursive($a4, $a5); // save key []
+        # Results -->
+        // "a" => array:2 [▶]
+        // "b" => array:2 [▶]
+        // "c" => array:2 [▶]
+        // "f" => "yellow"
+        // "h" => "white"
+        // "k" => array:2 [▶]
+        // "g" => "black"
+        // "i" => "white"
+        
+        
+        // $a=array("Dog","Cat","Horse");
+        // $array = array_multisort($a);
+        // print_r($a4); echo "<br>"; print_r($a5);
+        
+        // $array = array_pad($a, 5, "blue"); // return 5 elements
+        // $array = array_pop($a);
+        // $array = array_pop($a);
+
+        // $a = [5,5,1,2];
+        // print_r($a);
+        // $array = array_product($a); // multiply 
+        // $array = array_push($a, "test1", "B2");
+        // $array = array_rand($a, 3);
+
+        // $array = array_reduce($a, 'self::arrReduce');
+        
+        // $a1=array("red","green");
+        // $a2=array("blue","yellow");
+        
+        // $array = array_replace($a1,$a2);
+
+        $a1 = [
+            "a"=> ["red", "b" => ["green", "blue"]]
+        ];
+        $a2 = [
+            "a"=> ["Yellow", "b" => ["black"]]
+        ];
+
+        print_r($a1); echo "<br>"; print_r($a2);
+        $array = array_replace_recursive($a1, $a2); // a=> [], b=> []
+        
         dd($array);
     }
+
+    public function arrReduce($v1, $v2){
+        return $v1. "-". $v2;
+    }
+    public function arrayMap($v1, $v2){
+        if($v1 === $v2){
+            return "Same: ". $v1;
+        }
+        return "different";
+        # Results -->
+        // 0 => "Same: red"
+        // 1 => "Same: green"
+        // 2 => "Same: blue"
+        // 3 => "different"
+        // 4 => "Same: white"
+        // 5 => "different"
+    }
+
 
     public function testOdd($a){
         return ($a & 1);
