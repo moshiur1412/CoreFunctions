@@ -89,7 +89,7 @@ class ProblemController extends Controller
 
         $array_count_values = array_count_values($a); // return value->count();
 
-        $a4 = [ "a" => "red", "b" => "green", "c"=> "blue", "f" => "yellow", "h" => "white", "k" => "diff"];
+        $a4 = [ "a" => "red", "b" => "green", "c"=> "blue", "f" => "yellow", "h" => "white", "k" => "diff", "d" => "red"];
         $a5 = [ "a" => "red", "c" => "green", "b"=> "blue", "g" => "black", "i" => "white", "k" => "diff1" ];
 
         // $array = array_diff($a4, $a5);                                // [yellow, diff] --> Searching value
@@ -166,17 +166,88 @@ class ProblemController extends Controller
         
         // $array = array_replace($a1,$a2);
 
-        $a1 = [
-            "a"=> ["red", "b" => ["green", "blue"]]
-        ];
-        $a2 = [
-            "a"=> ["Yellow", "b" => ["black"]]
-        ];
+        // $a1 = [
+        //     "a"=> ["red", "b" => ["green", "blue"]]
+        // ];
+        // $a2 = [
+        //     "a"=> ["Yellow", "b" => ["black"]]
+        // ];
 
-        print_r($a1); echo "<br>"; print_r($a2);
-        $array = array_replace_recursive($a1, $a2); // a=> [], b=> []
+        // print_r($a1); echo "<br>"; print_r($a2);
+        // $array = array_replace_recursive($a1, $a2); // a=> [], b=> []
         
-        dd($array);
+
+        // $a = ["a" => "Volvo", "b" => "BMW", "c" => "Toyota"];
+        // $array = array_reverse($a);
+        // $array = array_search("BMW", $a, true); // return key 
+        // $array = array_shift($a);
+        // $array = array_unshift($a);
+
+        // $a = [ 0=> "red", 1=> "green", 2=> "blue"];
+
+        // echo array_shift($a);
+        // $array = array_slice($a4,1,4);
+
+        // $array =  array_slice($a4,4,1); // return the rest element
+        // $array = array_splice($a4,2,2,$a5);
+    
+        // $a1=array("a"=>"red","b"=>"green","c"=>"blue","d"=>"yellow");
+        // $a2=array("a"=>"purple","b"=>"orange", "f" => "ddd");
+        // array_splice($a1,3,0,$a2);
+        
+        // $a=array("a"=>52.2,"b"=>13.7,"c"=>0.9);
+        // $array = array_sum($a);
+        
+        
+        # uDiff User Defined compare values -->
+        // print_r($a4); echo "<br>"; print_r($a5);
+
+        // $array = array_udiff($a4,$a5, 'self::arrayFunction'); // ['yellow', 'diff']
+        // $array = array_udiff_assoc($a4,$a5, 'self::arrayFunction'); // ['green', 'blue','yellow', 'white', 'diff']
+        // $array = array_udiff_uassoc($a4,$a5, 'self::arrayFunction','self::arrayFunction'); // [same]
+        
+        // $array = array_unique($a4);
+        // array_unshift($a4, "inserted unshirt()"); 
+        // $array = array_values($a4); // return val/not key;
+
+        // $array = array_walk($a4, 'self::arrWalk');
+            // $a6 = [$a4,$a5];
+            // $array = array_walk_recursive($a6, 'self::arrWalk');
+
+        //     $fname = "moshiur";
+        //     $lname = "Rahman";
+        //     $age = 28;
+
+        // $result = compact('fname', 'lname', 'age');
+
+        $people = ["moshiur", "Ratul", "Samiul", "C"];
+
+        // $result= current($people);
+        // $result = prev($people);
+        // $result = next($people);
+        // $result = reset($people);
+        // $result = end($people);
+        // print_r(each($people));
+        // $a ="or";
+        // $ar = ["a" => "Cat","b" => "Dog", "c" => "Horse"];
+        // extract($ar);
+        // echo $a;
+            // list($a, $b, $c) = $people;
+        // $result = key($people);
+
+        #PHP natcasesort() Function
+
+        // $temp_files = ['t1.txt', 't5.txt', 't9.txt'];
+        // \natsort($temp_files); // sorting data
+        // \natcasesort($temp_files); // set valirable 
+
+        // $result = range(0,10, 2);
+        shuffle($people);
+        dd($people);
+    }
+    public function arrWalk($v, $k){
+        echo "the key $k has the value $v <br>";
+
     }
 
     public function arrReduce($v1, $v2){
