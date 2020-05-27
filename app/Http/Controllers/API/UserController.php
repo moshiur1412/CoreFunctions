@@ -14,6 +14,9 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 class UserController extends Controller 
 {
     
+    public function userList(){
+        return User::all();
+    }
     public function register(StoreUser $request){
         
         \Log::info('Req=API/UserController@register Called');

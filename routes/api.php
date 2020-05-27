@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
+Route::get('user_list', 'API\UserController@userList');
 
 Route::resource('questions', 'QuestionController');
 

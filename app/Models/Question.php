@@ -10,7 +10,8 @@ class Question extends Model
 {
     use VotableTrait;
     
-    protected $fillable = ['title', 'body'];
+    protected $guarded = [];
+    // protected $fillable = ['title', 'body'];
 
     protected $appends = ['created_date', 'favorites_count', 'body_html', 'is_favorited'];
     
