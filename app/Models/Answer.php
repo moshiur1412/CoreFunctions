@@ -27,7 +27,7 @@ class Answer extends Model
 
         static::created(function($answer){
             $answer->question->increment('answers_count');
-            \Log::info('Req=App\Models\Answer::boot static::created called');
+            \Log::info('Req=App/Models/Answer::boot static::created called');
        });
 
        static::deleted(function ($answer){
@@ -39,7 +39,7 @@ class Answer extends Model
             $question->save();
         }
 
-        \Log::info('Req=App\Models\Answer::boot satic::deleted called');
+        \Log::info('Req=App/Models/Answer::boot satic::deleted called');
 
         });
 
