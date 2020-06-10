@@ -4,7 +4,24 @@ git push github
 git push bitbucket
 git push gitlab
 git push orign master (for all push)
-
+\
+# main file 
+-------------
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = git@github.com:vorsurm/CoreFunctions.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+	
+------------------------------------------>
 
 [core]
 	repositoryformatversion = 0
