@@ -3,7 +3,7 @@ Three Repo at a time
 git push github
 git push bitbucket
 git push gitlab
-git push orign master (for all)
+git push orign master (for all push)
 
 
 [core]
