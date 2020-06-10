@@ -1,9 +1,9 @@
-Three Repo Config updated
+Three Repo at a time
 =========================
 git push github
 git push bitbucket
 git push gitlab
-git push orign master
+git push orign master (for all)
 
 
 [core]
