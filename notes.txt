@@ -5,8 +5,8 @@ git push bitbucket
 git push gitlab
 git push orign master (for all push)
 \
-# main file 
--------------
+# One git file 
+---------------
 [core]
 	repositoryformatversion = 0
 	filemode = false
