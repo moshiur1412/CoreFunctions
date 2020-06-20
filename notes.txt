@@ -5,8 +5,9 @@ git push bitbucket
 git push gitlab
 git push orign master (for all push)
 \
-# One git file 
----------------
+
+# Sigle git file
+==================
 [core]
 	repositoryformatversion = 0
 	filemode = false
@@ -20,9 +21,11 @@ git push orign master (for all push)
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
-	
+
 ------------------------------------------>
 
+# 3 in one git files
+=====================
 [core]
 	repositoryformatversion = 0
 	filemode = true
