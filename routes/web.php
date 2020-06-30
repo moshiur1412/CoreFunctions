@@ -15,8 +15,12 @@
 // 	return view('layouts.app');
 // });
 
-Route::get('/queue-test', 'QueueController@index');
+Route::get('/custom', function(){
+	// dd(config('app.developer'));
+	dd(config('blog'));
+});
 
+Route::get('/queue-test', 'QueueController@index');
 
 Route::get('/', 'QuestionController@index');
 
