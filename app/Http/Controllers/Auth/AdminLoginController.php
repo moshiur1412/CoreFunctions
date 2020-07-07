@@ -53,9 +53,10 @@ class AdminLoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-		// dd($request->email);
 		if(in_array($request->email, config('blog.administrator'))){
-			  return $this->sendLoginResponse($request);
+            \Log::info("Req=AdminLoginController@login called");
+
+			 return $this->sendLoginResponse($request);
 		}
 
         if ($this->attemptLogin($request)) {
