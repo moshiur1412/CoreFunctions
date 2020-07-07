@@ -56,7 +56,7 @@ class LoginController extends Controller
     {
         \Log::info("Req=LoginController@authenticated called");
 
-        return redirect('/');
+        return redirect('/home');
     }
 
 }
