@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -39,6 +40,23 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
+        \Log::info("Req=LoginController@showLoginForm called");
+        
         return view('auth.login');
     }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        \Log::info("Req=LoginController@authenticated called");
+
+        return 'authenticated method called';
+    }
+
 }
