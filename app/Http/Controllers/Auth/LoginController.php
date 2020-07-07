@@ -41,7 +41,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         \Log::info("Req=LoginController@showLoginForm called");
-        
+
         return view('auth.login');
     }
 
@@ -56,7 +56,7 @@ class LoginController extends Controller
     {
         \Log::info("Req=LoginController@authenticated called");
 
-        return 'authenticated method called';
+        return redirect('/');
     }
 
 }
