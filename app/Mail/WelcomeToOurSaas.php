@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-
+use App\Models\User;
 class WelcomeToOurSaas extends Mailable
 {
     use Queueable, SerializesModels;
@@ -18,9 +18,9 @@ class WelcomeToOurSaas extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        // $this->user = $user;
+        $this->user = $user;
     }
 
     /**
