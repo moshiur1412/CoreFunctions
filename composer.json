@@ -15,6 +15,7 @@
         "illuminate/routing": "^5.5|^6",
         "illuminate/session": "^5.5|^6",
         "illuminate/support": "^5.5|^6",
+        "jonathantorres/medium-sdk": "^0.3.2",
         "laravel/framework": "^6.2",
         "laravel/helpers": "^1.1",
         "laravel/tinker": "^1.0",

@@ -15,14 +15,17 @@
 // 	return view('layouts.app');
 // });
 
-// Route::get('/custom', function(){
-	// dd(config('app.developer'));
-	// dd(config('blog'));
-// });
+Route::get('/custom', function(){
+	$tsp = resolve('medium-php-sdk');
+
+	dd($tsp);
+	dd(config('app.developer'));
+	dd(config('blog'));
+});
 
 Route::get('/queue-test', 'QueueController@index');
 
-// Route::get('/', 'QuestionController@index');
+Route::get('/', 'QuestionController@index');
 
 Auth::routes();
 
