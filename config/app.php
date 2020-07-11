@@ -3,6 +3,10 @@
 return [
 
     'developer' => 'moshiur@me.com',
+
+    'administrators' => [
+        'admin@gmail.com',
+    ],
     
     /*
     |--------------------------------------------------------------------------
