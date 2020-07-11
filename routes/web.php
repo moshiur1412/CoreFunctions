@@ -14,12 +14,6 @@
 // Route::get('/', function () {
 // 	return view('layouts.app');
 // });
-Route::middleware('admin')->prefix('admin')->group(function(){
-
-	Route::get('/', function(){
-		dd('route was reached');
-	});
-});
 
 Route::middleware('test')->get('/custom', function(){
 
