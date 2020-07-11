@@ -15,7 +15,8 @@
 // 	return view('layouts.app');
 // });
 
-Route::get('/custom', function(){
+Route::middleware('test')->get('/custom', function(){
+
 	$tsp = resolve('medium-php-sdk');
 
 	dd($tsp);
