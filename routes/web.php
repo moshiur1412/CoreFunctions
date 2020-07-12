@@ -15,7 +15,18 @@
 // 	return view('layouts.app');
 // });
 
-Route::middleware('test')->get('/custom', function(){
+// Route::middleware('test')->get('/custom', function(){
+Route::get('/custom/{id}', function(\illuminate\Http\Request $request, $id){
+
+	
+	if(!auth()->check()){
+		
+		throw new \App\Exceptions\HackerAlertException;
+		
+	}
+
+	return \App\Models\User::findOrFail($id);
+	
 
 	$tsp = resolve('medium-php-sdk');
 
@@ -31,8 +42,6 @@ Route::get('/', 'QuestionController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
 
 Route::get('cruds', 'CrudController@index');
 Route::get('cruds/create', 'CrudController@create')->name('cruds.index');
