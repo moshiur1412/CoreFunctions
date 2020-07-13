@@ -32,7 +32,7 @@ $post = \App\Models\Post::findOrFail($id);
 	return response()->json([
 		'title' => $post->title,
 		'body' => $post->body,
-		'published' => $post->created_at->toFormattedDateString()
+		'published' => $post->createdAt()
 	]);
 });
 
