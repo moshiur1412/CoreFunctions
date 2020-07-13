@@ -48,6 +48,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        throw $exception;
         if($exception instanceof ModelNotFoundException){
             return response()->json([
                 'Message' => 'Hey, We couldn\'t find that user'

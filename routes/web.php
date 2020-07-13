@@ -15,25 +15,34 @@
 // 	return view('layouts.app');
 // });
 
-// Route::middleware('test')->get('/custom', function(){
-Route::get('/custom/{id}', function(\illuminate\Http\Request $request, $id){
 
-	
-	if(!auth()->check()){
-		
-		throw new \App\Exceptions\HackerAlertException;
-		
-	}
+Route::get('/about', function(){
 
-	return \App\Models\User::findOrFail($id);
-	
+	// return 'About me';
 
-	$tsp = resolve('medium-php-sdk');
+	return view('about');
 
-	dd($tsp);
-	dd(config('app.developer'));
-	dd(config('blog'));
 });
+
+// Route::middleware('test')->get('/custom', function(){
+// Route::get('/custom/{id}', function(\illuminate\Http\Request $request, $id){
+
+	
+// 	if(!auth()->check()){
+		
+// 		throw new \App\Exceptions\HackerAlertException;
+		
+// 	}
+
+// 	return \App\Models\User::findOrFail($id);
+	
+
+// 	$tsp = resolve('medium-php-sdk');
+
+// 	dd($tsp);
+// 	dd(config('app.developer'));
+// 	dd(config('blog'));
+// });
 
 Route::get('/queue-test', 'QueueController@index');
 
