@@ -24,6 +24,18 @@ Route::get('/about', function(){
 
 });
 
+Route::get('post/{id}', function(\illuminate\Http\Request $request, $id){
+
+
+$post = \App\Models\Post::findOrFail($id);
+
+	return response()->json([
+		'title' => $post->title,
+		'body' => $post->body,
+		'published' => $post->created_at->toFormattedDateString()
+	]);
+});
+
 // Route::middleware('test')->get('/custom', function(){
 // Route::get('/custom/{id}', function(\illuminate\Http\Request $request, $id){
 
