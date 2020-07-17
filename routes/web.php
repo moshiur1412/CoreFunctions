@@ -19,15 +19,12 @@
 Route::get('/about', function(){
 
 	// return 'About me';
-
 	return view('about');
 
 });
 
 Route::get('post/{id}', function(\illuminate\Http\Request $request, $id){
-
-
-$post = \App\Models\Post::findOrFail($id);
+	$post = \App\Models\Post::findOrFail($id);
 
 	return response()->json([
 		'title' => $post->title,
@@ -37,24 +34,17 @@ $post = \App\Models\Post::findOrFail($id);
 });
 
 // Route::middleware('test')->get('/custom', function(){
-// Route::get('/custom/{id}', function(\illuminate\Http\Request $request, $id){
-
+Route::get('/custom/{id}', function(\illuminate\Http\Request $request, $id){
 	
-// 	if(!auth()->check()){
-		
-// 		throw new \App\Exceptions\HackerAlertException;
-		
-// 	}
+	if(!auth()->check()){
+		throw new \App\Exceptions\HackerAlertException;
+	}
+	return \App\Models\User::findOrFail($id);
 
-// 	return \App\Models\User::findOrFail($id);
-	
 
-// 	$tsp = resolve('medium-php-sdk');
-
-// 	dd($tsp);
-// 	dd(config('app.developer'));
-// 	dd(config('blog'));
-// });
+	// $tsp = resolve('medium-php-sdk');
+	// dd($tsp);
+});
 
 Route::get('/queue-test', 'QueueController@index');
 
@@ -67,7 +57,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('cruds', 'CrudController@index');
 Route::get('cruds/create', 'CrudController@create')->name('cruds.index');
 Route::post('cruds/store', 'CrudController@store')->name('cruds.store');
-
 
 Route::resource('questions', 'QuestionController')->except(['show']);
 

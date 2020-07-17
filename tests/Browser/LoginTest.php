@@ -10,9 +10,12 @@ use App\Models\User;
 class LoginTest extends DuskTestCase
 {
     use DatabaseMigrations;
+    
     /**
      * @group login-test
-     */
+     * 
+    */
+    
     public function testAUserCanLogin(){
 
         $user = factory(User::class)->create();
