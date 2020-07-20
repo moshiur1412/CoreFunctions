@@ -1,5 +1,4 @@
-<div class="row mt-4">
-    <div class="col-md-12">
+<div class="row mt-4"> <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <h2> Answer The Question</h2>

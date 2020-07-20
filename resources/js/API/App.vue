@@ -78,7 +78,7 @@ export default {
                this.nextUrl = data.next_page_url;
                data.data.forEach(task =>{
                    this.task_list.push(task);
-                   this.isLoading =false;
+                   this.isLoading=false;
                })
            });
        },
