@@ -78,4 +78,6 @@ Route::get('solutions/{id}', 'ProblemController@solutions');
 
 
 // File upload
-Route::get('file_uploads', 'FileUploadController@fileCreate');
+Route::get('file/upload', 'FileUploadController@fileCreate');
+Route::post('file/store', 'FileUploadController@fileStore');
+Route::post('file/delete', 'FileUploadController@fileDestroy');
