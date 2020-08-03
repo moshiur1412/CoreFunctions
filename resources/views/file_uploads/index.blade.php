@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
 	<h3 class="jumbotron">Drag and Drop Files here to upload</h3>
-	<form method="post" action="{{url('file/store')}}" enctype="multipart/form-data" class="dropzone" id="dropzone">
+	<form method="post" action="{{ url('file/store') }}" enctype="multipart/form-data" class="dropzone" id="dropzone">
 		@csrf
 	</form>   
 </div>
@@ -19,15 +19,16 @@
 		acceptedFiles: ".jpeg,.jpg,.png,.gif",
 		addRemoveLinks: true,
 		timeout: 50000,
+		
 		removedfile: function(file) 
 		{
 			var name = file.upload.filename;
 			$.ajax({
 				headers: {
-					'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				},
 				type: 'POST',
-				url: '{{ url("image/delete") }}',
+				url: '{{ url("file/delete") }}',
 				data: {filename: name},
 				success: function (data){
 					console.log("File has been successfully removed!!");

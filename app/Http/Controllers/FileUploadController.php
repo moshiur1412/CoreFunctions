@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ImageUpload;
+use App\Models\FileUpload;
+
 
 class FileUploadController extends Controller
 {
@@ -18,9 +19,9 @@ class FileUploadController extends Controller
         $imageName = $image->getClientOriginalName();
         $image->move(public_path('images'),$imageName);
          
-        $imageUpload = new ImageUpload();
-        $imageUpload->filename = $imageName;
-        $imageUpload->save();
+        $fileUpload = new FileUpload();
+        $fileUpload->filename = $imageName;
+        $fileUpload->save();
         return response()->json(['success'=>$imageName]);
 
     }
@@ -28,7 +29,7 @@ class FileUploadController extends Controller
 
     public function fileDestroy(Request $request){
     	$filename =  $request->get('filename');
-       ImageUpload::where('filename',$filename)->delete();
+       FileUpload::where('filename',$filename)->delete();
        $path=public_path().'/images/'.$filename;
        
        if (file_exists($path)) {
