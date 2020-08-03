@@ -75,3 +75,7 @@ Route::post('questions/{question}/vote', 'VoteQuestionController')->name('questi
 Route::post('answers/{answer}/vote', 'VoteAnswerController')->name('answers.vote');
 
 Route::get('solutions/{id}', 'ProblemController@solutions');
+
+
+// File upload
+Route::get('file_uploads', 'FileUploadController@fileCreate');
