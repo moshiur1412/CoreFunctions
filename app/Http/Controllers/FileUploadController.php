@@ -10,7 +10,7 @@ class FileUploadController extends Controller
 {
     public function fileCreate(){
 
-    	return view('file_uploads.index');
+    	return view('fileup.index');
     }
 
     public function fileStore(Request $request){
