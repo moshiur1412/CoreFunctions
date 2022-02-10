@@ -121,6 +121,7 @@ Try and learing for the best practices.
 
 ## Sublime Text 3.2.2 Build 3211 key licence 
 
+```sh
 ----- BEGIN LICENSE -----
 Member J2TeaM
 Single User License
@@ -134,12 +135,13 @@ A684C2DC 0B1583D4 19CBD290 217618CD
 DD9AF44B 99C49590 D2DBDEE1 75860FD2
 8C8BB2AD B2ECE5A4 EFC08AF2 25A9B864
 ------ END LICENSE ------
-
+```
 
 Edit host file
 - linux/Mac: /etc/hosts
 - Windows: C:\Windows\System32\drivers\etc
 
+```sh
 # Sublime Text 3
 127.0.0.1 license.sublimehq.com
 127.0.0.1 45.55.255.55
@@ -154,6 +156,7 @@ Edit host file
 0.0.0.0 license.sublimehq.com
 0.0.0.0 45.55.255.55
 0.0.0.0 45.55.41.223
+```
 
 ## Alternative Sublime Activation
 - Go to https://hexed.it/
