@@ -1,10 +1,12 @@
-Three Repo at a time
-=========================
+# Three Repostories at a time
+=============================
 git push github
 git push bitbucket
 git push gitlab
 git push orign master (for all push)
-\
+
+
+
 
 # Sigle git file
 ==================
