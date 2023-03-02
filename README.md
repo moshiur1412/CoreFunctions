@@ -27,7 +27,7 @@ Core Functions are developed to easily get the most common features and function
 
 ## Overview
 
-Develop for must have requirements.
+Develop for some necessary requirements.
 
 ## Problem Domain Area
 
